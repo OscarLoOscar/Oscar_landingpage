@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor / IDE (local settings only)
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs & env (if you add tooling later)
+*.log
+.env
+.env.*
+
+# Optional: uncomment if you add Node/npm tooling later
+# node_modules/
