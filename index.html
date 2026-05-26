@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Oscar Lo — Software Engineer, technical educator, and AI course instructor." />
-  <title>Oscar Lo | Software Engineer & AI Educator</title>
+  <meta name="description" content="Oscar Lo — Backend engineer, analyst programmer, technical educator, and career transition story from operations into software engineering." />
+  <title>Oscar Lo | Backend Engineer & Technical Educator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
@@ -15,12 +15,245 @@
   <header class="hero" id="top">
     <div class="hero__overlay"></div>
     <div class="hero__content">
-      <p class="hero__eyebrow">Software Engineer · Technical Educator</p>
-      <h1 class="hero__title">後端工程師，專注可擴展系統與技術教育，並帶領各年齡層學習 AI。</h1>
+      <p class="hero__eyebrow">Backend Engineer · Analyst Programmer · Technical Educator</p>
+      <h1 class="hero__title">由服務業及團隊管理成功轉型至軟件工程，現專注企業級後端系統、教學與 AI 應用。</h1>
+      <p class="hero__lead">
+        Built enterprise-grade backend systems at IBM, shipped solo Django and Python products,
+        continue maintaining real client systems, and bring a productivity-first mindset to backend
+        engineering, freelancing, technical teaching, and real-world problem solving.
+      </p>
+      <div class="hero__actions">
+        <a class="btn-outline btn-outline--light" href="https://github.com/OscarLoOscar" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <!-- <a class="btn-outline btn-outline--light" href="https://linkedin.com/in/oscar-lo-71a828244" target="_blank" rel="noopener noreferrer">LinkedIn</a> -->
+        <a class="hero__link" href="#experience">Professional Experience</a>
+      </div>
+      <ul class="hero__stats" aria-label="Career highlights">
+        <li>
+          <span class="hero__stat-value">85%+</span>
+          <span class="hero__stat-label">test coverage achieved on key IBM modules</span>
+        </li>
+        <li>
+          <span class="hero__stat-value">4 solo builds</span>
+          <span class="hero__stat-label">from e-commerce and crawler systems to Chrome extensions</span>
+        </li>
+        <li>
+          <span class="hero__stat-value">Live clients</span>
+          <span class="hero__stat-label">ongoing maintenance for Sally-sells.com and freelance delivery</span>
+        </li>
+      </ul>
     </div>
   </header>
 
   <main>
+    <!-- Professional Summary -->
+    <section class="profile" id="profile" aria-labelledby="profile-heading">
+      <div class="section-shell">
+        <div class="section-intro">
+          <span class="divider">+</span>
+          <p class="label">Professional Summary</p>
+          <span class="divider">+</span>
+          <h2 id="profile-heading" class="section-title">Practical backend engineering with an educator's mindset.</h2>
+          <span class="divider">+</span>
+          <p class="section-lead">
+            Java and Python focused engineer with startup execution, enterprise delivery experience,
+            and a strong track record of building tools that make teams faster and systems more reliable.
+          </p>
+        </div>
+
+        <div class="profile__grid">
+          <article class="card">
+            <p class="card__meta">Summary</p>
+            <h3 class="card__title">Enterprise delivery, automation, and product-minded execution.</h3>
+            <p class="card__text">
+              Analyst Programmer with hands-on experience delivering enterprise-grade backend systems
+              at IBM and driving operational efficiency in startup environments. Specialized in Java
+              with Spring Boot and Python with Django, with practical experience in microservices,
+              AWS cloud operations, and high-performance API design.
+            </p>
+            <p class="card__text">
+              I enjoy turning messy operational pain points into maintainable software, from backend
+              services to internal automation, always with a bias toward measurable business value.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="card__meta">Core Strengths</p>
+            <h3 class="card__title">Technical depth with clear communication.</h3>
+            <ul class="card__list">
+              <li>Java, Spring Boot, Python, Django, PostgreSQL, MySQL, Redis, and REST API design</li>
+              <li>AWS operations, SonarQube remediation, K6 testing, and production reliability work</li>
+              <li>Automation thinking that reduces repetitive work and improves team throughput</li>
+              <li>Teaching, mentoring, and translating technical ideas for students and junior developers</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <p class="card__meta">Career Transition</p>
+            <h3 class="card__title">A successful move from frontline operations into software engineering.</h3>
+            <p class="card__text">
+              Before entering tech, I spent a decade in service and team management roles. That path
+              built strong ownership, client communication, and execution under pressure.
+            </p>
+            <p class="card__text">
+              Today, that transition shows up in how I build software: practical, user-aware, and
+              focused on solutions that teams can actually adopt and sustain.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section class="experience" id="experience" aria-labelledby="experience-heading">
+      <div class="section-shell">
+        <div class="section-intro">
+          <span class="divider">+</span>
+          <p class="label">Professional Experience</p>
+          <span class="divider">+</span>
+          <h2 id="experience-heading" class="section-title">From startup execution to enterprise delivery.</h2>
+          <span class="divider">+</span>
+          <p class="section-lead">
+            Experience across enterprise engineering, startup execution, ongoing client maintenance,
+            and freelance delivery, with a blend of backend development, automation, and teaching.
+          </p>
+        </div>
+
+        <div class="experience__grid">
+          <article class="card card--feature">
+            <p class="card__meta">IBM · Analyst Programmer · Apr 2025 - Aug 2025</p>
+            <h3 class="card__title">Enterprise backend systems for HKTDC platforms.</h3>
+            <ul class="card__list">
+              <li>Contributed to eMP 2.0, EOP, and MyHKTDC, building and improving scalable microservices for customer-facing enterprise systems.</li>
+              <li>Enhanced calendar-service and enquiry-service, and refactored batch notification modules for WhatsApp, SMS, and WeChat delivery.</li>
+              <li>Raised unit test coverage from roughly 60% to 85%+ and resolved critical SonarQube issues to reduce technical debt.</li>
+              <li>Ran K6 scenario-based performance testing, integrated reCAPTCHA Enterprise, and supported AWS production environments for stable operations.</li>
+            </ul>
+          </article>
+
+          <article class="card card--feature">
+            <p class="card__meta">Venturenix Lab · Programmer · Jun 2023 - Mar 2025</p>
+            <h3 class="card__title">Automation, full-stack delivery, and teaching-driven leadership.</h3>
+            <ul class="card__list">
+              <li>Built internal automation tools including a WhatsApp Chrome extension and a Python-based JobsDB system, cutting repetitive recruitment work by more than 10 hours per week.</li>
+              <li>Developed a Job Opening System with Spring Boot and React, including auto-generated contracts that reduced administrative processing time by 40%.</li>
+              <li>Migrated WordPress platforms to Cloudways, improving SEO performance and site speed.</li>
+              <li>Led daily LeetCode drills for junior developers and helped organize the 2024 MasterCode Java Competition, strengthening the team's learning culture.</li>
+            </ul>
+          </article>
+
+          <article class="card card--feature">
+            <p class="card__meta">Freelance · Dimerco · Ongoing</p>
+            <h3 class="card__title">Independent client delivery and long-term technical ownership.</h3>
+            <ul class="card__list">
+              <li>Handling freelance development work independently for Dimerco, with direct ownership over delivery, communication, and implementation.</li>
+              <li>Applying the same solo-builder mindset used in product and automation work: practical scoping, maintainable code, and reliable follow-through.</li>
+              <li>Balancing freelance execution with ongoing product maintenance and personal project development.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Projects -->
+    <section class="projects" id="projects" aria-labelledby="projects-heading">
+      <div class="section-shell">
+        <div class="section-intro">
+          <span class="divider">+</span>
+          <p class="label">GitHub Highlights</p>
+          <span class="divider">+</span>
+          <h2 id="projects-heading" class="section-title">Technical projects that reflect how I solve problems.</h2>
+          <span class="divider">+</span>
+          <p class="section-lead">
+            Selected projects that emphasize independent execution: solo-built products, solo-owned
+            automation, and systems I still maintain for real users and clients.
+          </p>
+        </div>
+
+        <div class="projects__grid">
+          <article class="card">
+            <p class="card__meta">Django · E-commerce · Solo Build</p>
+            <h3 class="card__title">Sally-sells.com E-Commerce Website</h3>
+            <p class="card__text">
+              Independently designed and developed an e-commerce website in Django for
+              `Sally-sells.com`, covering the full development flow as a one-person builder rather
+              than as one contributor on a team.
+            </p>
+            <p class="card__text">
+              The project is not just a past build. I am still handling ongoing maintenance, which
+              means taking responsibility for stability, fixes, and keeping the system usable over time.
+            </p>
+            <div class="tag-list" aria-label="Technologies used">
+              <span class="tag">Django</span>
+              <span class="tag">E-commerce</span>
+              <span class="tag">Solo Build</span>
+              <span class="tag">Maintenance</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <p class="card__meta">Freelance · Client Work · Solo Delivery</p>
+            <h3 class="card__title">Dimerco Freelance Work</h3>
+            <p class="card__text">
+              An ongoing freelance engagement handled independently, showing that I can take on
+              external client work with direct ownership over communication, implementation, and delivery.
+            </p>
+            <p class="card__text">
+              This work highlights trust, accountability, and the ability to support real business needs
+              outside a fixed in-house team structure.
+            </p>
+            <div class="tag-list" aria-label="Technologies used">
+              <span class="tag">Freelance</span>
+              <span class="tag">Client Delivery</span>
+              <span class="tag">Ownership</span>
+              <span class="tag">Ongoing</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <p class="card__meta">Python · Crawling · Solo Build</p>
+            <h3 class="card__title">JobsDB Crawling System</h3>
+            <p class="card__text">
+              A one-person Python system built to crawl JobsDB data for repeatable market research
+              and recruitment support workflows.
+            </p>
+            <p class="card__text">
+              The focus was not only data extraction, but building something practical enough to save
+              time and support operational decisions in a repeatable way.
+            </p>
+            <div class="tag-list" aria-label="Technologies used">
+              <span class="tag">Python</span>
+              <span class="tag">Crawler</span>
+              <span class="tag">Automation</span>
+              <span class="tag">Solo Build</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <p class="card__meta">Chrome Extension · WhatsApp · Solo Build</p>
+            <h3 class="card__title">Google Chrome Send WhatsApp Extension</h3>
+            <p class="card__text">
+              A Chrome extension developed independently to streamline WhatsApp sending workflows and
+              reduce repetitive manual messaging tasks.
+            </p>
+            <p class="card__text">
+              It reflects the way I approach tools: identify the bottleneck, automate the pain point,
+              and deliver something lightweight that solves a real operational problem.
+            </p>
+            <div class="tag-list" aria-label="Technologies used">
+              <span class="tag">Chrome Extension</span>
+              <span class="tag">WhatsApp</span>
+              <span class="tag">Automation</span>
+              <span class="tag">Solo Build</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="projects__cta">
+          <a class="btn-outline" href="https://github.com/OscarLoOscar" target="_blank" rel="noopener noreferrer">Explore GitHub</a>
+        </div>
+      </div>
+    </section>
+
     <!-- AI Courses -->
     <section class="courses" id="courses" aria-labelledby="courses-heading">
       <div class="courses__intro">
@@ -117,45 +350,42 @@
         </article>
       </div>
     </section>
-
     <!-- About -->
     <section class="about" id="about" aria-labelledby="about-heading">
       <div class="about-split">
         <div class="about-split__content">
           <span class="divider">+</span>
-          <p class="label">關於我</p>
+          <p class="label">About</p>
           <span class="divider">+</span>
           <h2 id="about-heading" class="section-title">Oscar Lo</h2>
           <span class="divider">+</span>
           <div class="about-text">
             <p>
-              Software Engineer specializing in backend systems, full-stack development,
-              cloud deployment, and technical education.
+              I write software with a strong bias toward practical outcomes: faster operations,
+              clearer workflows, and systems that can scale without becoming difficult to maintain.
             </p>
             <p>
-              3 years of experience teaching and mentoring developers in Java, Spring Boot,
-              PostgreSQL, MySQL, Redis, Docker, AWS, and modern web development.
+              Alongside professional development work, I also teach and mentor. At Venturenix Lab I
+              led daily technical drills for junior developers, and today I continue that educator
+              mindset through AI courses for students and adults.
             </p>
-            <p>Built and deployed multiple real-world systems including:</p>
+            <p>What makes me different is the combination of engineering and communication:</p>
             <ul>
-              <li>E-commerce platforms</li>
-              <li>Contract management systems</li>
-              <li>Automation workflows</li>
-              <li>Android applications</li>
-              <li>Financial API integrations</li>
-              <li>Job crawling systems</li>
+              <li>Enterprise backend delivery at IBM</li>
+              <li>Startup automation and full-stack execution at Venturenix Lab</li>
+              <li>A successful transition from service leadership into software engineering</li>
+              <li>Hands-on teaching experience across junior developers, students, and adult learners</li>
             </ul>
-            <p>
-              Industry experience includes enterprise portal development at IBM, contributing
-              to large-scale customer-facing systems such as COP and EOP.
-            </p>
-            <p>
-              Focused on writing practical, scalable, and maintainable software solutions—and
-              now extending that mindset to AI education for students and professionals.
-            </p>
+            <!-- <p>
+              I am currently pursuing a BSc (Hons) in Computing at Wrexham University while
+              continuing to build software and educational experiences with real-world value.
+            </p> -->
           </div>
           <span class="divider">+</span>
-          <a class="btn-outline" href="https://github.com/OscarLoOscar" target="_blank" rel="noopener noreferrer">View GitHub</a>
+          <div class="about-actions">
+            <a class="btn-outline" href="https://github.com/OscarLoOscar" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <!-- <a class="btn-outline" href="https://linkedin.com/in/oscar-lo-71a828244" target="_blank" rel="noopener noreferrer">LinkedIn</a> -->
+          </div>
           <span class="divider">+</span>
         </div>
         <div class="about-split__visual" style="background-image: url('./assets/images/02_linkin.png')" aria-hidden="true"></div>
@@ -167,6 +397,8 @@
     <div class="site-footer__inner">
       <nav class="footer-nav" aria-label="Footer">
         <a href="https://github.com/OscarLoOscar" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span class="footer-dot" aria-hidden="true">·</span>
+        <!-- <a href="https://linkedin.com/in/oscar-lo-71a828244" target="_blank" rel="noopener noreferrer">LinkedIn</a> -->
         <span class="footer-dot" aria-hidden="true">·</span>
         <button type="button" class="footer-link-btn" id="tech-stack-toggle" aria-expanded="false" aria-controls="tech-stack-panel">
           Tech Stack
