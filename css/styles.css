@@ -292,6 +292,30 @@ button {
   margin-bottom: 0.9rem;
 }
 
+.card__title a {
+  text-decoration: underline;
+  text-decoration-color: rgba(17, 17, 17, 0.25);
+  text-underline-offset: 0.15em;
+}
+
+.card__title a:hover {
+  text-decoration-color: var(--black);
+}
+
+.hero__stat-label a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.hero__stat-label a:hover {
+  opacity: 0.85;
+}
+
+.card__text a {
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
 .card__text {
   font-size: 0.95rem;
   color: var(--gray-700);
@@ -453,6 +477,47 @@ button {
   width: 100%;
   height: auto;
   display: block;
+}
+
+.course-split--primary-images {
+  min-height: auto;
+  align-items: start;
+}
+
+.course-split__body--images {
+  display: block;
+  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 3vw, 2rem);
+  background: var(--white);
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.course-split__scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  aspect-ratio: 1024 / 571;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+}
+
+.course-split__scroll:focus-visible {
+  outline: 2px solid var(--gray-500);
+  outline-offset: 2px;
+}
+
+.course-split__body--images img,
+.course-split__scroll img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 1.25rem;
+}
+
+.course-split__body--images img:last-child,
+.course-split__scroll img:last-child {
+  margin-bottom: 0;
 }
 
 h5.course-split__title {
