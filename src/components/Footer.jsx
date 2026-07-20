@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LINKS } from "../constants/links";
 
 const TECH_STACK = [
   {
@@ -54,12 +55,19 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="site-footer__inner">
         <nav className="footer-nav" aria-label="Footer">
-          <a href="https://github.com/OscarLoOscar" target="_blank" rel="noopener noreferrer">
+          <a href={LINKS.github} target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
           <span className="footer-dot" aria-hidden="true">
             ·
           </span>
+          <a href={LINKS.instagram} target="_blank" rel="noopener noreferrer">
+            宏業創科教育
+          </a>
+          <span className="footer-dot" aria-hidden="true">
+            ·
+          </span>
+          <a href="#course-contact">課程查詢</a>
           <span className="footer-dot" aria-hidden="true">
             ·
           </span>

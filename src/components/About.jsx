@@ -1,4 +1,5 @@
 import { assetUrl } from "../utils/assetUrl";
+import { LINKS } from "../constants/links";
 
 export default function About() {
   return (
@@ -32,13 +33,14 @@ export default function About() {
           </div>
           <span className="divider">+</span>
           <div className="about-actions">
-            <a
-              className="btn-outline"
-              href="https://github.com/OscarLoOscar"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a className="btn-outline" href={LINKS.instagram} target="_blank" rel="noopener noreferrer">
+              {LINKS.instagramLabel}
+            </a>
+            <a className="btn-outline" href={LINKS.github} target="_blank" rel="noopener noreferrer">
               GitHub
+            </a>
+            <a className="btn-outline" href="#course-contact">
+              課程查詢
             </a>
           </div>
           <span className="divider">+</span>

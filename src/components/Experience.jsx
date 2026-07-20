@@ -18,6 +18,52 @@ export default function Experience() {
 
         <div className="experience__grid">
           <article className="card card--feature">
+            <p className="card__meta">Solo · Sally-sells.com · Sep 2025 - Present</p>
+            <h3 className="card__title">Independent e-commerce build and long-term maintenance.</h3>
+            <ul className="card__list">
+              <li>
+                Independently designed and developed{" "}
+                <a href="https://sally-sells.com" target="_blank" rel="noopener noreferrer">
+                  Sally-sells.com
+                </a>
+                , a Django e-commerce website covering the full solo development flow from
+                implementation to production deployment.
+              </li>
+              <li>
+                Handle ongoing maintenance for the live store—fixes, updates, and keeping the system
+                stable and usable for real customers over time.
+              </li>
+              <li>
+                Own the full product lifecycle as a one-person builder: scoping, backend delivery,
+                deployment, and post-launch support without a team buffer.
+              </li>
+            </ul>
+          </article>
+
+          <article className="card card--feature">
+            <p className="card__meta">Freelance · Dimerco · May 2026 - Present</p>
+            <h3 className="card__title">Independent client delivery and long-term technical ownership.</h3>
+            <ul className="card__list">
+              <li>
+                Handle freelance development work independently for Dimerco, with direct ownership
+                over delivery, communication, and implementation.
+              </li>
+              <li>
+                Write and maintain SQL queries against the company&apos;s internal database to support
+                data extraction, reporting, and operational workflows.
+              </li>
+              <li>
+                Build automation that logs into internal web portals and internal database systems to
+                streamline repetitive access and data-handling tasks.
+              </li>
+              <li>
+                Develop OCR-based workflows to capture and process document data, plus C# (.cs)
+                implementation for client-side tooling and integration work.
+              </li>
+            </ul>
+          </article>
+
+          <article className="card card--feature">
             <p className="card__meta">IBM · Analyst Programmer · Apr 2025 - Aug 2025</p>
             <h3 className="card__title">Enterprise backend systems for HKTDC platforms.</h3>
             <ul className="card__list">
@@ -56,25 +102,6 @@ export default function Experience() {
               <li>
                 Led daily LeetCode drills for junior developers and helped organize the 2024 MasterCode
                 Java Competition, strengthening the team&apos;s learning culture.
-              </li>
-            </ul>
-          </article>
-
-          <article className="card card--feature">
-            <p className="card__meta">Freelance · Dimerco · Ongoing</p>
-            <h3 className="card__title">Independent client delivery and long-term technical ownership.</h3>
-            <ul className="card__list">
-              <li>
-                Handling freelance development work independently for Dimerco, with direct ownership
-                over delivery, communication, and implementation.
-              </li>
-              <li>
-                Applying the same solo-builder mindset used in product and automation work: practical
-                scoping, maintainable code, and reliable follow-through.
-              </li>
-              <li>
-                Balancing freelance execution with ongoing product maintenance and personal project
-                development.
               </li>
             </ul>
           </article>

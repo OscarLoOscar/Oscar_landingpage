@@ -1,12 +1,82 @@
 import { useState } from "react";
 import { assetUrl } from "../utils/assetUrl";
+import CourseCompareList from "./CourseCompareList";
+import CourseContactCta from "./CourseContactCta";
 import CourseLightboxImage from "./CourseLightboxImage";
+import CorporateTraining from "./CorporateTraining";
 import Lightbox from "./Lightbox";
+
+const TEACHING_PHILOSOPHY = [
+  {
+    bad: "把 AI 當作「標準答案機」，抄完就算。",
+    good: "教學員先理解問題，再用 AI 輔助思考、整理同修正。",
+  },
+  {
+    bad: "一次過丟晒所有要求，期望 AI 幫你完成成件事。",
+    good: "分步提問、逐步收窄範圍，建立可重複嘅互動習慣。",
+  },
+  {
+    bad: "工具名單愈長愈好，學完仍然唔知點樣用喺自己場景。",
+    good: "按學員年齡同用途揀合適工具，專注解決真實功課或工作問題。",
+  },
+  {
+    bad: "只做 flashy demo，學員離開課堂就唔知點繼續。",
+    good: "提供可帶走嘅 workflow 同判斷標準，回到學校或公司都用到。",
+  },
+];
+
+const VIBE_CODING_PHILOSOPHY = [
+  {
+    bad: "一次過叫 AI 改晒成個 project，唔 review 就 merge。",
+    good: "Small increment + review：一次只改一小部分，每步 check pattern 同 shared code。",
+  },
+  {
+    bad: "唔 setup Cursor Rules / MCP，靠運氣同 AI 即興發揮。",
+    good: "用 Rules、Skills 同 MCP 建立 guardrails，將知識同 workflow 帶入開發。",
+  },
+  {
+    bad: "Greenfield 咁做 brownfield：唔 map project 就改 legacy code。",
+    good: "先定位畫面、梳理 data flow，再喺可控範圍內改 A 唔壞 B。",
+  },
+  {
+    bad: "只追速度，唔做 Git branch / test / deploy check。",
+    good: "配合 Git & GitHub、測試同交付節奏，令 AI 協作真正上 production。",
+  },
+];
+
+const FORMAT_LADDER = [
+  {
+    meta: "試堂",
+    title: "2-3 小時體驗課",
+    text: "適合第一次接觸 AI 嘅學生、家長或 team，快速了解一個清晰主題，例如 AI 素養、Cursor 入門或短片創作。",
+  },
+  {
+    meta: "系列",
+    title: "多節循序課程",
+    text: "按週或按單元推進，適合中學生、小學生或企業 team 逐步建立共用方法同輸出標準。",
+  },
+  {
+    meta: "12 小時",
+    title: "大人實用進階班",
+    text: "集中處理文件、研究、溝通同日常效率，適合 admin、老闆、家長或退休學員。",
+  },
+  {
+    meta: "全日",
+    title: "實作工作坊",
+    text: "即場做 project、整理 use case、完成 deliverable，適合 Vibe Coding、企業培訓或數字人廣告。",
+  },
+];
 
 const TABS = [
   { id: "secondary", label: "中學生", panelId: "panel-secondary", tabId: "tab-secondary" },
   { id: "primary", label: "小學生", panelId: "panel-primary", tabId: "tab-primary" },
   { id: "adults", label: "大人", panelId: "panel-adults", tabId: "tab-adults" },
+  {
+    id: "corporate",
+    label: "企業AI培訓",
+    panelId: "panel-corporate",
+    tabId: "tab-corporate",
+  },
   { id: "vibe-coding", label: "Vibe Coding", panelId: "panel-vibe-coding", tabId: "tab-vibe-coding" },
   { id: "digital-human", label: "數字人廣告", panelId: "panel-digital-human", tabId: "tab-digital-human" },
 ];
@@ -67,13 +137,36 @@ export default function Courses() {
     <section className="courses" id="courses" aria-labelledby="courses-heading">
       <div className="courses__intro">
         <span className="divider">+</span>
-        <p className="label">即將開課</p>
-        <span className="divider">+</span>
         <h2 id="courses-heading" className="section-title">
           AI 課程
         </h2>
         <span className="divider">+</span>
-        <p className="section-lead">為中學生、小學生及成年人而設，按年齡與需要調整內容與節奏。</p>
+        <p className="section-lead">
+          為中學生、小學生、成年人及企業而設，按年齡、程度同需要調整內容與節奏。
+        </p>
+      </div>
+
+      <CourseCompareList
+        heading="我的教學重點：教判斷同方法，唔只教 prompt"
+        items={TEACHING_PHILOSOPHY}
+      />
+
+      <div className="course-formats" id="course-formats">
+        <span className="divider">+</span>
+        <p className="label">課程形式 / 時長</p>
+        <span className="divider">+</span>
+        <p className="section-lead">
+          可按對象同目標自由組合：由短試堂開始，到系列課、12 小時實用班，或者全日實作 workshop。
+        </p>
+        <div className="course-formats__grid">
+          {FORMAT_LADDER.map((format) => (
+            <article className="card" key={format.meta}>
+              <p className="card__meta">{format.meta}</p>
+              <h3 className="card__title">{format.title}</h3>
+              <p className="card__text">{format.text}</p>
+            </article>
+          ))}
+        </div>
       </div>
 
       <div className="course-tabs" role="tablist" aria-label="課程類別">
@@ -199,6 +292,16 @@ export default function Courses() {
         </article>
 
         <article
+          className={`course-panel${activeTab === "corporate" ? " is-active" : ""}`}
+          id="panel-corporate"
+          role="tabpanel"
+          aria-labelledby="tab-corporate"
+          hidden={activeTab !== "corporate"}
+        >
+          <CorporateTraining />
+        </article>
+
+        <article
           className={`course-panel${activeTab === "vibe-coding" ? " is-active" : ""}`}
           id="panel-vibe-coding"
           role="tabpanel"
@@ -241,6 +344,10 @@ export default function Courses() {
               <span className="divider">+</span>
             </div>
           </div>
+          <CourseCompareList
+            heading="Vibe Coding：唔係求快，而係可控地交付"
+            items={VIBE_CODING_PHILOSOPHY}
+          />
         </article>
 
         <article
@@ -285,6 +392,8 @@ export default function Courses() {
           </div>
         </article>
       </div>
+
+      <CourseContactCta />
 
       {lightbox && (
         <Lightbox

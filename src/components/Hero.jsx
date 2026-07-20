@@ -1,3 +1,5 @@
+import { LINKS } from "../constants/links";
+
 export default function Hero() {
   return (
     <header className="hero" id="top">
@@ -16,13 +18,24 @@ export default function Hero() {
         <div className="hero__actions">
           <a
             className="btn-outline btn-outline--light"
-            href="https://github.com/OscarLoOscar"
+            href={LINKS.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {LINKS.instagramLabel}
+          </a>
+          <a
+            className="btn-outline btn-outline--light"
+            href={LINKS.github}
             target="_blank"
             rel="noopener noreferrer"
           >
             GitHub
           </a>
-          <a className="hero__link" href="#experience">
+          <a className="btn-outline btn-outline--light" href="#courses">
+            AI 課程
+          </a>
+          <a className="btn-outline btn-outline--light" href="#experience">
             Professional Experience
           </a>
         </div>
