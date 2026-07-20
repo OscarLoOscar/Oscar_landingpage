@@ -1,24 +1,21 @@
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
+# Created by https://www.toptal.com/developers/gitignore/api/react
+# Edit at https://www.toptal.com/developers/gitignore?templates=react
 
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Editor / IDE (local settings only)
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Logs & env (if you add tooling later)
+### react ###
+.DS_*
 *.log
-.env
-.env.*
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
 
 node_modules/
 dist/
