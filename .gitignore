@@ -20,6 +20,8 @@ Desktop.ini
 .env
 .env.*
 
-# Build / deps — never commit these
+# Build / deps
 node_modules/
 dist/
+
+# docs/ is the GitHub Pages publish folder (committed on purpose)
