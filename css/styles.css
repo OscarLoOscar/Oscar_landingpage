@@ -498,6 +498,10 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .scroll-intro *,
   .scroll-intro *::before,
   .scroll-intro *::after {
