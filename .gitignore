@@ -19,3 +19,4 @@ sketch
 
 node_modules/
 dist/
+.worktrees/
