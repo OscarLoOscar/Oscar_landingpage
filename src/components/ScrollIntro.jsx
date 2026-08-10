@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { INTRO_SCENES } from "../constants/introScenes";
+import { assetUrl } from "../utils/assetUrl";
 
 export default function ScrollIntro() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -25,7 +26,11 @@ export default function ScrollIntro() {
   return (
     <section className="scroll-intro" aria-label="Portfolio introduction">
       <div className="scroll-intro__stage" data-active-index={activeIndex}>
-        <div className="scroll-intro__visual" aria-hidden="true" />
+        <div
+          className="scroll-intro__visual"
+          aria-hidden="true"
+          style={{ backgroundImage: `url("${assetUrl(activeScene.image)}")` }}
+        />
         <div className="scroll-intro__copy">
           <p className="scroll-intro__label">{activeScene.label}</p>
           <h1 className="scroll-intro__title">{activeScene.title}</h1>
