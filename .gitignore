@@ -1,27 +1,23 @@
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
+# Created by https://www.toptal.com/developers/gitignore/api/react
+# Edit at https://www.toptal.com/developers/gitignore?templates=react
 
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Editor / IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Logs & env
+### react ###
+.DS_*
 *.log
-.env
-.env.*
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
 
 # Build / deps
 node_modules/
 dist/
-
-# docs/ is the GitHub Pages publish folder (committed on purpose)
+.worktrees/
