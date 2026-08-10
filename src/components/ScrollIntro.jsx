@@ -5,9 +5,7 @@ import { assetUrl } from "../utils/assetUrl";
 export default function ScrollIntro() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const sectionRef = useRef(null);
   const stepRefs = useRef([]);
-  const touchStartY = useRef(null);
   const activeScene = INTRO_SCENES[activeIndex];
 
   const skipToHero = () => {
@@ -43,33 +41,8 @@ export default function ScrollIntro() {
     return () => observer.disconnect();
   }, [reducedMotion]);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section || reducedMotion) return undefined;
-
-    const handleWheel = (event) => {
-      if (Math.abs(event.deltaY) < 1) return;
-      event.preventDefault();
-      skipToHero();
-    };
-
-    section.addEventListener("wheel", handleWheel, { passive: false });
-    return () => section.removeEventListener("wheel", handleWheel);
-  }, [reducedMotion]);
-
   return (
-    <section
-      className="scroll-intro"
-      aria-label="Portfolio introduction"
-      ref={sectionRef}
-      onTouchStart={(event) => {
-        touchStartY.current = event.touches[0].clientY;
-      }}
-      onTouchEnd={(event) => {
-        if (touchStartY.current - event.changedTouches[0].clientY > 24) skipToHero();
-        touchStartY.current = null;
-      }}
-    >
+    <section className="scroll-intro" aria-label="Portfolio introduction">
       <div className="scroll-intro__stage" data-active-index={activeIndex}>
         <picture className="scroll-intro__visual" aria-hidden="true">
           <source srcSet={assetUrl(activeScene.image.replace(/\.png$/, ".avif"))} type="image/avif" />
