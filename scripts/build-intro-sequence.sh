@@ -14,26 +14,25 @@ raw_dir="$stage_root/raw"
 stage_preview="$stage_root/preview.mp4"
 backup_frames="$sequence_dir/.frames.backup.$$"
 backup_preview="$sequence_dir/.preview.backup.$$"
+had_previous_frames=0
+had_previous_preview=0
 frames_replaced=0
 preview_replaced=0
 
 cleanup() {
   status=$?
   if (( status != 0 )); then
-    if test -d "$backup_frames"; then
-      if (( frames_replaced )); then
-        rm -rf "$output_dir"
-      fi
+    if (( frames_replaced )); then
+      rm -rf "$output_dir"
+    fi
+    if (( had_previous_frames )) && test -d "$backup_frames"; then
       mv "$backup_frames" "$output_dir"
     fi
-    if test -f "$backup_preview"; then
-      if (( preview_replaced )); then
-        rm -f "$preview_path"
-      fi
-      mv "$backup_preview" "$preview_path"
+    if (( preview_replaced )); then
+      rm -f "$preview_path"
     fi
-    if (( frames_replaced )) && (( ! preview_replaced )) && test ! -d "$backup_frames"; then
-      rm -rf "$output_dir"
+    if (( had_previous_preview )) && test -f "$backup_preview"; then
+      mv "$backup_preview" "$preview_path"
     fi
   fi
   rm -rf "$stage_root" "$backup_frames" "$backup_preview"
@@ -155,12 +154,18 @@ test -f "$stage_preview"
 
 if test -e "$output_dir"; then
   mv "$output_dir" "$backup_frames"
+  had_previous_frames=1
 fi
 if test -e "$preview_path"; then
   mv "$preview_path" "$backup_preview"
+  had_previous_preview=1
 fi
 mv "$stage_frames" "$output_dir"
 frames_replaced=1
+if test "${INTRO_SEQUENCE_FAILPOINT:-}" = "after-frames-replacement"; then
+  printf 'Injected failure after frames replacement\n' >&2
+  exit 1
+fi
 mv "$stage_preview" "$preview_path"
 preview_replaced=1
 
