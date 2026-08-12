@@ -3,6 +3,7 @@ import { assetUrl } from "../utils/assetUrl";
 import {
   coverRect,
   framePath,
+  frameToScrollOffset,
   INTRO_FRAME_COUNT,
   progressToFrame,
 } from "../utils/introSequence";
@@ -32,6 +33,7 @@ export function useIntroCanvas({
     let requestedFrame = 0;
     let notifiedFrame = -1;
     let lastDrawnImage = null;
+    let introWasActive = false;
 
     const trimCache = () => {
       while (decodedFrames.size > MAX_CACHE_SIZE) {
@@ -118,6 +120,9 @@ export function useIntroCanvas({
         const viewportTop = 0;
         const sectionRect = section.getBoundingClientRect();
         const scrollableHeight = sectionRect.height - window.innerHeight;
+        introWasActive =
+          sectionRect.top <= viewportTop &&
+          sectionRect.bottom >= window.innerHeight;
         const progress = scrollableHeight > 0
           ? (viewportTop - sectionRect.top) / scrollableHeight
           : 0;
@@ -154,14 +159,34 @@ export function useIntroCanvas({
       });
     };
 
+    const handleResize = () => {
+      if (introWasActive && notifiedFrame >= 0) {
+        const sectionRect = section.getBoundingClientRect();
+        const sectionTop = sectionRect.top + window.scrollY;
+        const scrollableHeight = sectionRect.height - window.innerHeight;
+        const targetScroll = sectionTop + frameToScrollOffset(
+          requestedFrame,
+          scrollableHeight,
+        );
+        const previousScrollBehavior =
+          document.documentElement.style.scrollBehavior;
+
+        document.documentElement.style.scrollBehavior = "auto";
+        window.scrollTo(0, targetScroll);
+        document.documentElement.style.scrollBehavior = previousScrollBehavior;
+      }
+
+      requestDraw();
+    };
+
     window.addEventListener("scroll", requestDraw, { passive: true });
-    window.addEventListener("resize", requestDraw);
+    window.addEventListener("resize", handleResize);
     requestDraw();
 
     return () => {
       disposed = true;
       window.removeEventListener("scroll", requestDraw);
-      window.removeEventListener("resize", requestDraw);
+      window.removeEventListener("resize", handleResize);
       if (animationFrameId !== null) {
         window.cancelAnimationFrame(animationFrameId);
       }

@@ -1544,6 +1544,11 @@ h5.course-split__title {
 }
 
 @media (max-width: 768px) {
+  .hero__content {
+    width: 100%;
+    min-width: 0;
+  }
+
   .course-split,
   .about-split {
     grid-template-columns: 1fr;

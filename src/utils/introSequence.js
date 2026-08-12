@@ -20,6 +20,18 @@ export function framePath(frame) {
   return `assets/images/intro-sequence/frames/frame-${String(frame).padStart(3, "0")}.webp`;
 }
 
+export function frameToScrollOffset(
+  frame,
+  scrollableHeight,
+  frameCount = INTRO_FRAME_COUNT,
+) {
+  const lastFrame = Math.max(0, frameCount - 1);
+  if (lastFrame === 0) return 0;
+
+  const clampedFrame = Math.min(lastFrame, Math.max(0, frame));
+  return (clampedFrame / lastFrame) * Math.max(0, scrollableHeight);
+}
+
 export function coverRect(sourceWidth, sourceHeight, targetWidth, targetHeight) {
   const sourceRatio = sourceWidth / sourceHeight;
   const targetRatio = targetWidth / targetHeight;

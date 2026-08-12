@@ -28,6 +28,13 @@ test("frame paths are zero padded", () => {
   assert.equal(sequence.framePath(180), "assets/images/intro-sequence/frames/frame-180.webp");
 });
 
+test("frame maps to the same relative scroll offset after resize", () => {
+  assert.equal(sequence.frameToScrollOffset(-1, 3376, 181), 0);
+  assert.equal(sequence.frameToScrollOffset(72, 3376, 181), 1350.4);
+  assert.equal(sequence.frameToScrollOffset(180, 3376, 181), 3376);
+  assert.equal(sequence.frameToScrollOffset(181, 3376, 181), 3376);
+});
+
 test("cover rectangle crops a square image into a wide canvas", () => {
   assert.deepEqual(sequence.coverRect(512, 512, 1200, 675), {
     sx: 0,
