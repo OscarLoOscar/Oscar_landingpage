@@ -587,9 +587,9 @@ button {
 
   .scroll-intro__copy {
     transition: none;
-    animation: none;
+    animation: none !important;
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 
   .scroll-intro,
