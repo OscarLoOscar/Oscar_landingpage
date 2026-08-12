@@ -6,7 +6,11 @@ import { frameToScene } from "../utils/introSequence";
 
 export default function ScrollIntro() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   const canvasRef = useRef(null);
   const sectionRef = useRef(null);
   const stepRefs = useRef([]);
