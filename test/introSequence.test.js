@@ -35,6 +35,13 @@ test("frame maps to the same relative scroll offset after resize", () => {
   assert.equal(sequence.frameToScrollOffset(181, 3376, 181), 3376);
 });
 
+test("intro visibility excludes sections completely outside the viewport", () => {
+  assert.equal(sequence.isIntroVisible({ top: -500, bottom: 0 }, 800), false);
+  assert.equal(sequence.isIntroVisible({ top: 800, bottom: 1300 }, 800), false);
+  assert.equal(sequence.isIntroVisible({ top: -500, bottom: 1 }, 800), true);
+  assert.equal(sequence.isIntroVisible({ top: 799, bottom: 1300 }, 800), true);
+});
+
 test("cover rectangle crops a square image into a wide canvas", () => {
   assert.deepEqual(sequence.coverRect(512, 512, 1200, 675), {
     sx: 0,

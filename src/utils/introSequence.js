@@ -32,6 +32,10 @@ export function frameToScrollOffset(
   return (clampedFrame / lastFrame) * Math.max(0, scrollableHeight);
 }
 
+export function isIntroVisible(sectionRect, viewportHeight) {
+  return sectionRect.bottom > 0 && sectionRect.top < viewportHeight;
+}
+
 export function coverRect(sourceWidth, sourceHeight, targetWidth, targetHeight) {
   const sourceRatio = sourceWidth / sourceHeight;
   const targetRatio = targetWidth / targetHeight;

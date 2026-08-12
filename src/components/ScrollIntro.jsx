@@ -13,7 +13,6 @@ export default function ScrollIntro() {
   );
   const canvasRef = useRef(null);
   const sectionRef = useRef(null);
-  const stepRefs = useRef([]);
   const activeScene = INTRO_SCENES[activeIndex];
   const handleFrameChange = useCallback((frame) => {
     setActiveIndex(frameToScene(frame));
@@ -32,6 +31,14 @@ export default function ScrollIntro() {
     });
   };
 
+  const selectReducedMotionScene = (event, index) => {
+    if (!reducedMotion) return;
+
+    event.preventDefault();
+    setActiveIndex(index);
+    window.history.replaceState(null, "", `#intro-scene-${index + 1}`);
+  };
+
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updatePreference = () => setReducedMotion(mediaQuery.matches);
@@ -40,25 +47,6 @@ export default function ScrollIntro() {
     mediaQuery.addEventListener("change", updatePreference);
     return () => mediaQuery.removeEventListener("change", updatePreference);
   }, []);
-
-  useEffect(() => {
-    if (!reducedMotion) return undefined;
-
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const nextIndex = Number(entry.target.dataset.index);
-            setActiveIndex(nextIndex);
-          }
-        }),
-      { threshold: 0.6 },
-    );
-
-    stepRefs.current.forEach((step) => step && observer.observe(step));
-
-    return () => observer.disconnect();
-  }, [reducedMotion]);
 
   return (
     <section
@@ -109,6 +97,7 @@ export default function ScrollIntro() {
               href={`#intro-scene-${index + 1}`}
               aria-current={activeIndex === index ? "step" : undefined}
               aria-label={`Go to ${scene.label}`}
+              onClick={(event) => selectReducedMotionScene(event, index)}
             >
               <span className="scroll-intro__progress-dot" aria-hidden="true" />
               <span className="scroll-intro__progress-label">{scene.label.split(" · ")[1]}</span>
@@ -126,9 +115,6 @@ export default function ScrollIntro() {
           className="scroll-intro__step"
           data-index={index}
           id={`intro-scene-${index + 1}`}
-          ref={(step) => {
-            stepRefs.current[index] = step;
-          }}
           aria-label={`${scene.label}: ${scene.title}`}
         >
           <div className="scroll-intro__step-copy">

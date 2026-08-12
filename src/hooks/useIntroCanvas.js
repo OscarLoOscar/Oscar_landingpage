@@ -5,6 +5,7 @@ import {
   framePath,
   frameToScrollOffset,
   INTRO_FRAME_COUNT,
+  isIntroVisible,
   progressToFrame,
 } from "../utils/introSequence";
 
@@ -115,10 +116,15 @@ export function useIntroCanvas({
 
       animationFrameId = window.requestAnimationFrame(() => {
         animationFrameId = null;
-        sizeCanvas();
-
         const viewportTop = 0;
         const sectionRect = section.getBoundingClientRect();
+        if (!isIntroVisible(sectionRect, window.innerHeight)) {
+          introWasActive = false;
+          return;
+        }
+
+        sizeCanvas();
+
         const scrollableHeight = sectionRect.height - window.innerHeight;
         introWasActive =
           sectionRect.top <= viewportTop &&
