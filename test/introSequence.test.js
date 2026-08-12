@@ -22,3 +22,21 @@ test("scene changes only when an anchor is reached", () => {
   assert.equal(sequence.frameToScene(179, anchors), 3);
   assert.equal(sequence.frameToScene(180, anchors), 4);
 });
+
+test("frame paths are zero padded", () => {
+  assert.equal(sequence.framePath(0), "assets/images/intro-sequence/frames/frame-000.webp");
+  assert.equal(sequence.framePath(180), "assets/images/intro-sequence/frames/frame-180.webp");
+});
+
+test("cover rectangle crops a square image into a wide canvas", () => {
+  assert.deepEqual(sequence.coverRect(512, 512, 1200, 675), {
+    sx: 0,
+    sy: 112,
+    sw: 512,
+    sh: 288,
+    dx: 0,
+    dy: 0,
+    dw: 1200,
+    dh: 675,
+  });
+});

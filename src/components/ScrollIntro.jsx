@@ -1,17 +1,26 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { INTRO_SCENES } from "../constants/introScenes";
+import { useIntroCanvas } from "../hooks/useIntroCanvas";
 import { assetUrl } from "../utils/assetUrl";
-import { getNextIntroIndex } from "../utils/introScroll";
+import { frameToScene } from "../utils/introSequence";
 
 export default function ScrollIntro() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const canvasRef = useRef(null);
   const sectionRef = useRef(null);
   const stepRefs = useRef([]);
-  const activeIndexRef = useRef(0);
-  const wheelLockRef = useRef(false);
-  const wheelUnlockTimerRef = useRef(null);
   const activeScene = INTRO_SCENES[activeIndex];
+  const handleFrameChange = useCallback((frame) => {
+    setActiveIndex(frameToScene(frame));
+  }, []);
+
+  useIntroCanvas({
+    canvasRef,
+    sectionRef,
+    reducedMotion,
+    onFrameChange: handleFrameChange,
+  });
 
   const skipToHero = () => {
     document.getElementById("top")?.scrollIntoView({
@@ -29,14 +38,13 @@ export default function ScrollIntro() {
   }, []);
 
   useEffect(() => {
-    if (reducedMotion) return undefined;
+    if (!reducedMotion) return undefined;
 
     const observer = new IntersectionObserver(
       (entries) =>
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const nextIndex = Number(entry.target.dataset.index);
-            activeIndexRef.current = nextIndex;
             setActiveIndex(nextIndex);
           }
         }),
@@ -48,62 +56,6 @@ export default function ScrollIntro() {
     return () => observer.disconnect();
   }, [reducedMotion]);
 
-  useEffect(() => {
-    if (reducedMotion) return undefined;
-
-    const handleWheel = (event) => {
-      if (Math.abs(event.deltaY) < 8) return;
-
-      if (wheelLockRef.current) {
-        event.preventDefault();
-        return;
-      }
-
-      const section = sectionRef.current;
-      const hero = document.getElementById("top");
-      if (!section || !hero) return;
-
-      const sectionRect = section.getBoundingClientRect();
-      const isInsideIntro = sectionRect.top <= 1 && sectionRect.bottom > 1;
-      const isReturningFromHero =
-        event.deltaY < 0 && sectionRect.bottom <= 1 && sectionRect.bottom > -window.innerHeight;
-
-      if (!isInsideIntro && !isReturningFromHero) return;
-
-      event.preventDefault();
-
-      const currentIndex = isReturningFromHero
-        ? INTRO_SCENES.length
-        : activeIndexRef.current;
-      const nextIndex = getNextIntroIndex(
-        currentIndex,
-        event.deltaY,
-        INTRO_SCENES.length,
-      );
-      const target =
-        nextIndex === INTRO_SCENES.length ? hero : stepRefs.current[nextIndex];
-
-      if (!target) return;
-
-      wheelLockRef.current = true;
-      activeIndexRef.current = Math.min(nextIndex, INTRO_SCENES.length - 1);
-      setActiveIndex(activeIndexRef.current);
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-
-      wheelUnlockTimerRef.current = window.setTimeout(() => {
-        wheelLockRef.current = false;
-      }, 700);
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-      window.clearTimeout(wheelUnlockTimerRef.current);
-      wheelLockRef.current = false;
-    };
-  }, [reducedMotion]);
-
   return (
     <section
       className="scroll-intro"
@@ -112,7 +64,6 @@ export default function ScrollIntro() {
     >
       <div className="scroll-intro__stage" data-active-index={activeIndex}>
         <picture className="scroll-intro__visual" aria-hidden="true">
-          <source srcSet={assetUrl(activeScene.image.replace(/\.png$/, ".avif"))} type="image/avif" />
           <img
             src={assetUrl(activeScene.image)}
             alt=""
@@ -120,6 +71,13 @@ export default function ScrollIntro() {
             fetchPriority={activeIndex === 0 ? "high" : "auto"}
           />
         </picture>
+        {!reducedMotion && (
+          <canvas
+            className="scroll-intro__canvas"
+            ref={canvasRef}
+            aria-hidden="true"
+          />
+        )}
         <div className="scroll-intro__copy">
           <p className="scroll-intro__label">{activeScene.label}</p>
           <h1 className="scroll-intro__title">{activeScene.title}</h1>
