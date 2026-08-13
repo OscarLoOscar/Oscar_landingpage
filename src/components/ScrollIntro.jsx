@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { INTRO_SCENES } from "../constants/introScenes";
+import { INTRO_SCENES, INTRO_TRANSITIONS } from "../constants/introScenes";
 import { useIntroCanvas } from "../hooks/useIntroCanvas";
 import { assetUrl } from "../utils/assetUrl";
-import { frameToScene } from "../utils/introSequence";
 
 export default function ScrollIntro() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -12,17 +11,18 @@ export default function ScrollIntro() {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
   const canvasRef = useRef(null);
+  const videoRefs = useRef([]);
   const sectionRef = useRef(null);
   const activeScene = INTRO_SCENES[activeIndex];
-  const handleFrameChange = useCallback((frame) => {
-    setActiveIndex(frameToScene(frame));
+  const handleSceneArrive = useCallback((scene) => {
+    setActiveIndex(scene);
   }, []);
-
   useIntroCanvas({
     canvasRef,
+    videoRefs,
     sectionRef,
     reducedMotion,
-    onFrameChange: handleFrameChange,
+    onSceneArrive: handleSceneArrive,
   });
 
   const skipToHero = () => {
@@ -64,11 +64,27 @@ export default function ScrollIntro() {
           />
         </picture>
         {!reducedMotion && (
-          <canvas
-            className="scroll-intro__canvas"
-            ref={canvasRef}
-            aria-hidden="true"
-          />
+          <>
+            <div className="scroll-intro__videos" aria-hidden="true">
+              {INTRO_TRANSITIONS.map((src, index) => (
+                <video
+                  key={src}
+                  className="scroll-intro__video"
+                  ref={(node) => { videoRefs.current[index] = node; }}
+                  muted
+                  playsInline
+                  preload={index === 0 ? "auto" : "metadata"}
+                >
+                  <source src={assetUrl(src)} type="video/mp4" />
+                </video>
+              ))}
+            </div>
+            <canvas
+              className="scroll-intro__canvas"
+              ref={canvasRef}
+              aria-hidden="true"
+            />
+          </>
         )}
         <div className="scroll-intro__copy">
           <p className="scroll-intro__label">{activeScene.label}</p>

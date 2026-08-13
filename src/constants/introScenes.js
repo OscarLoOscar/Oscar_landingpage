@@ -5,3 +5,9 @@ export const INTRO_SCENES = [
   { label: "04 / 05 · THE HOME", title: "KEEP LEARNING", description: "Make room for new tools, stronger workflows, and better decisions.", image: "assets/images/intro-scenes/scene-02-estate.avif", anchorFrame: 135 },
   { label: "05 / 05 · THE CITY", title: "Backend Engineer · AI Educator", description: "From enterprise systems to practical tools, I build solid foundations and teach people how to use modern tools with confidence.", image: "assets/images/intro-scenes/scene-01-city.avif", anchorFrame: 180 },
 ];
+
+export const INTRO_TRANSITIONS = [
+  "assets/videos/intro/cafe-room.mp4",
+  "assets/videos/intro/room-office.mp4",
+  "assets/videos/intro/office-estate.mp4",
+];

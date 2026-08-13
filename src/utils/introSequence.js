@@ -1,6 +1,27 @@
 export const INTRO_FRAME_COUNT = 181;
 export const INTRO_ANCHOR_FRAMES = Object.freeze([0, 45, 90, 135, 180]);
 
+export function progressToIntroSegment(progress, segmentCount) {
+  const safeSegmentCount = Math.max(1, segmentCount);
+  const clamped = Math.min(1, Math.max(0, progress));
+  const scaled = clamped * safeSegmentCount;
+  const segmentIndex = Math.min(safeSegmentCount - 1, Math.floor(scaled));
+  const localProgress = clamped === 1 ? 1 : scaled - segmentIndex;
+  const sceneIndex = localProgress === 1 ? segmentIndex + 1 : segmentIndex;
+
+  return { segmentIndex, localProgress, sceneIndex };
+}
+
+export function getMountedMediaElements(elements) {
+  return elements.filter(Boolean);
+}
+
+export function getMediaProgress(segmentIndex, localProgress, mediaIndex) {
+  if (mediaIndex < segmentIndex) return 1;
+  if (mediaIndex > segmentIndex) return 0;
+  return localProgress;
+}
+
 export function progressToFrame(progress, frameCount = INTRO_FRAME_COUNT) {
   const clamped = Math.min(1, Math.max(0, progress));
   return Math.round(clamped * (frameCount - 1));

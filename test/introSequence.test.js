@@ -54,3 +54,46 @@ test("cover rectangle crops a square image into a wide canvas", () => {
     dh: 675,
   });
 });
+
+test("scroll progress resolves to a transition and local scrub progress", () => {
+  assert.deepEqual(sequence.progressToIntroSegment(-1, 4), {
+    segmentIndex: 0,
+    localProgress: 0,
+    sceneIndex: 0,
+  });
+  assert.deepEqual(sequence.progressToIntroSegment(0.125, 4), {
+    segmentIndex: 0,
+    localProgress: 0.5,
+    sceneIndex: 0,
+  });
+  assert.deepEqual(sequence.progressToIntroSegment(0.25, 4), {
+    segmentIndex: 1,
+    localProgress: 0,
+    sceneIndex: 1,
+  });
+  assert.deepEqual(sequence.progressToIntroSegment(0.875, 4), {
+    segmentIndex: 3,
+    localProgress: 0.5,
+    sceneIndex: 3,
+  });
+  assert.deepEqual(sequence.progressToIntroSegment(1, 4), {
+    segmentIndex: 3,
+    localProgress: 1,
+    sceneIndex: 4,
+  });
+});
+
+test("strict-mode ref cleanup ignores unmounted video elements", () => {
+  const first = { id: "first" };
+  const second = { id: "second" };
+  assert.deepEqual(sequence.getMountedMediaElements([first, null, second]), [
+    first,
+    second,
+  ]);
+});
+
+test("inactive transition videos stay pinned to their nearest anchor", () => {
+  assert.equal(sequence.getMediaProgress(1, 0.4, 0), 1);
+  assert.equal(sequence.getMediaProgress(1, 0.4, 1), 0.4);
+  assert.equal(sequence.getMediaProgress(1, 0.4, 2), 0);
+});

@@ -3,91 +3,46 @@ import { assetUrl } from "../utils/assetUrl";
 import {
   coverRect,
   framePath,
-  frameToScrollOffset,
-  INTRO_FRAME_COUNT,
-  isIntroVisible,
+  getMediaProgress,
+  getMountedMediaElements,
+  INTRO_ANCHOR_FRAMES,
   progressToFrame,
+  progressToIntroSegment,
 } from "../utils/introSequence";
 
+const SEGMENT_COUNT = INTRO_ANCHOR_FRAMES.length - 1;
+const VIDEO_SEGMENT_COUNT = 3;
 const MAX_CACHE_SIZE = 24;
 
 export function useIntroCanvas({
   canvasRef,
+  videoRefs,
   sectionRef,
   reducedMotion,
-  onFrameChange,
+  onSceneArrive,
 }) {
   useEffect(() => {
     if (reducedMotion) return undefined;
 
     const canvas = canvasRef.current;
     const section = sectionRef.current;
-    if (!canvas || !section) return undefined;
+    const videos = getMountedMediaElements(videoRefs.current);
+    if (!canvas || !section || videos.length !== VIDEO_SEGMENT_COUNT) return undefined;
 
     const context = canvas.getContext("2d");
     if (!context) return undefined;
 
     const decodedFrames = new Map();
-    const inFlightFrames = new Map();
     let animationFrameId = null;
     let disposed = false;
-    let requestedFrame = 0;
-    let notifiedFrame = -1;
-    let lastDrawnImage = null;
-    let introWasActive = false;
-
-    const trimCache = () => {
-      while (decodedFrames.size > MAX_CACHE_SIZE) {
-        let farthestFrame = null;
-        let farthestDistance = -1;
-
-        decodedFrames.forEach((_, frame) => {
-          const distance = Math.abs(frame - requestedFrame);
-          if (distance > farthestDistance) {
-            farthestFrame = frame;
-            farthestDistance = distance;
-          }
-        });
-
-        decodedFrames.delete(farthestFrame);
-      }
-    };
-
-    const loadFrame = (frame) => {
-      if (decodedFrames.has(frame)) {
-        return Promise.resolve(decodedFrames.get(frame));
-      }
-      if (inFlightFrames.has(frame)) return inFlightFrames.get(frame);
-
-      const image = new Image();
-      image.src = assetUrl(framePath(frame));
-      const promise = image
-        .decode()
-        .then(() => {
-          if (!disposed) {
-            decodedFrames.set(frame, image);
-            trimCache();
-          }
-          return image;
-        })
-        .finally(() => {
-          inFlightFrames.delete(frame);
-        });
-
-      inFlightFrames.set(frame, promise);
-      return promise;
-    };
+    let activeScene = -1;
+    let requestedFrame = INTRO_ANCHOR_FRAMES[3];
 
     const sizeCanvas = () => {
       const bounds = canvas.getBoundingClientRect();
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-      const width = Math.round(bounds.width * pixelRatio);
-      const height = Math.round(bounds.height * pixelRatio);
-
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+      canvas.width = Math.round(bounds.width * pixelRatio);
+      canvas.height = Math.round(bounds.height * pixelRatio);
     };
 
     const drawImage = (image) => {
@@ -108,96 +63,103 @@ export function useIntroCanvas({
         rect.dw,
         rect.dh,
       );
-      lastDrawnImage = image;
     };
 
-    const requestDraw = () => {
-      if (animationFrameId !== null) return;
+    const trimCache = () => {
+      while (decodedFrames.size > MAX_CACHE_SIZE) {
+        const firstFrame = decodedFrames.keys().next().value;
+        decodedFrames.delete(firstFrame);
+      }
+    };
 
-      animationFrameId = window.requestAnimationFrame(() => {
-        animationFrameId = null;
-        const viewportTop = 0;
-        const sectionRect = section.getBoundingClientRect();
-        if (!isIntroVisible(sectionRect, window.innerHeight)) {
-          introWasActive = false;
-          return;
-        }
+    const drawFrame = (frame) => {
+      requestedFrame = frame;
+      const cached = decodedFrames.get(frame);
+      if (cached) {
+        drawImage(cached);
+        return;
+      }
 
-        sizeCanvas();
+      const image = new Image();
+      image.src = assetUrl(framePath(frame));
+      image.decode().then(() => {
+        if (disposed) return;
+        decodedFrames.set(frame, image);
+        trimCache();
+        if (requestedFrame === frame) drawImage(image);
+      }).catch(() => {});
+    };
 
-        const scrollableHeight = sectionRect.height - window.innerHeight;
-        introWasActive =
-          sectionRect.top <= viewportTop &&
-          sectionRect.bottom >= window.innerHeight;
-        const progress = scrollableHeight > 0
-          ? (viewportTop - sectionRect.top) / scrollableHeight
-          : 0;
-        requestedFrame = progressToFrame(progress, INTRO_FRAME_COUNT);
+    const seekVideo = (video, localProgress) => {
+      if (!Number.isFinite(video.duration)) return;
+      const targetTime = Math.min(
+        Math.max(0, video.duration - 0.04),
+        localProgress * video.duration,
+      );
+      if (Math.abs(video.currentTime - targetTime) > 0.008) {
+        video.currentTime = targetTime;
+      }
+    };
 
-        if (requestedFrame !== notifiedFrame) {
-          notifiedFrame = requestedFrame;
-          onFrameChange(requestedFrame);
-        }
+    const render = () => {
+      animationFrameId = null;
+      const rect = section.getBoundingClientRect();
+      const scrollableHeight = rect.height - window.innerHeight;
+      const progress = scrollableHeight > 0
+        ? Math.min(1, Math.max(0, -rect.top / scrollableHeight))
+        : 0;
+      const { segmentIndex, localProgress, sceneIndex } = progressToIntroSegment(
+        progress,
+        SEGMENT_COUNT,
+      );
 
-        const requestedImage = decodedFrames.get(requestedFrame);
-        if (requestedImage) {
-          drawImage(requestedImage);
-        } else if (lastDrawnImage) {
-          drawImage(lastDrawnImage);
-        }
-
-        if (!requestedImage) {
-          loadFrame(requestedFrame)
-            .then(() => {
-              if (!disposed) requestDraw();
-            })
-            .catch(() => {});
-        }
-
-        for (let offset = 1; offset <= 8; offset += 1) {
-          const frame = requestedFrame + offset;
-          if (frame < INTRO_FRAME_COUNT) loadFrame(frame).catch(() => {});
-        }
-        for (let offset = 1; offset <= 3; offset += 1) {
-          const frame = requestedFrame - offset;
-          if (frame >= 0) loadFrame(frame).catch(() => {});
-        }
+      videos.forEach((video, index) => {
+        const visible = segmentIndex === index;
+        video.style.opacity = visible ? "1" : "0";
+        seekVideo(video, getMediaProgress(segmentIndex, localProgress, index));
       });
+
+      const canvasVisible = segmentIndex === VIDEO_SEGMENT_COUNT;
+      canvas.style.opacity = canvasVisible ? "1" : "0";
+      if (canvasVisible) {
+        const fromFrame = INTRO_ANCHOR_FRAMES[3];
+        const toFrame = INTRO_ANCHOR_FRAMES[4];
+        drawFrame(fromFrame + progressToFrame(localProgress, toFrame - fromFrame + 1));
+      }
+
+      if (sceneIndex !== activeScene) {
+        activeScene = sceneIndex;
+        onSceneArrive(activeScene);
+      }
+    };
+
+    const requestRender = () => {
+      if (animationFrameId === null) {
+        animationFrameId = window.requestAnimationFrame(render);
+      }
     };
 
     const handleResize = () => {
-      if (introWasActive && notifiedFrame >= 0) {
-        const sectionRect = section.getBoundingClientRect();
-        const sectionTop = sectionRect.top + window.scrollY;
-        const scrollableHeight = sectionRect.height - window.innerHeight;
-        const targetScroll = sectionTop + frameToScrollOffset(
-          requestedFrame,
-          scrollableHeight,
-        );
-        const previousScrollBehavior =
-          document.documentElement.style.scrollBehavior;
-
-        document.documentElement.style.scrollBehavior = "auto";
-        window.scrollTo(0, targetScroll);
-        document.documentElement.style.scrollBehavior = previousScrollBehavior;
-      }
-
-      requestDraw();
+      sizeCanvas();
+      requestRender();
     };
 
-    window.addEventListener("scroll", requestDraw, { passive: true });
+    videos.forEach((video) => {
+      video.pause();
+      video.addEventListener("loadedmetadata", requestRender);
+    });
+    sizeCanvas();
+    requestRender();
+    window.addEventListener("scroll", requestRender, { passive: true });
     window.addEventListener("resize", handleResize);
-    requestDraw();
 
     return () => {
       disposed = true;
-      window.removeEventListener("scroll", requestDraw);
+      window.removeEventListener("scroll", requestRender);
       window.removeEventListener("resize", handleResize);
-      if (animationFrameId !== null) {
-        window.cancelAnimationFrame(animationFrameId);
-      }
+      videos.forEach((video) => video.removeEventListener("loadedmetadata", requestRender));
+      if (animationFrameId !== null) window.cancelAnimationFrame(animationFrameId);
       decodedFrames.clear();
-      inFlightFrames.clear();
     };
-  }, [canvasRef, sectionRef, reducedMotion, onFrameChange]);
+  }, [canvasRef, onSceneArrive, reducedMotion, sectionRef, videoRefs]);
 }

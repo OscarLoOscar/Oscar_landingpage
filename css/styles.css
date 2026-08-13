@@ -270,13 +270,25 @@ button {
   z-index: 0;
 }
 
-.scroll-intro__canvas {
+.scroll-intro__canvas,
+.scroll-intro__videos,
+.scroll-intro__video {
   position: absolute;
   inset: 0;
   z-index: 0;
-  display: block;
   width: 100%;
   height: 100%;
+}
+
+.scroll-intro__canvas,
+.scroll-intro__video {
+  display: block;
+  object-fit: cover;
+  opacity: 0;
+}
+
+.scroll-intro__video {
+  transition: none;
 }
 
 .scroll-intro__visual img {
@@ -306,87 +318,8 @@ button {
   inset: auto auto 16vh clamp(1.25rem, 5vw, 5rem);
   z-index: 2;
   max-width: 34rem;
-  opacity: 0;
-  transform: translateY(1.5rem);
-  transition: opacity 360ms ease, transform 360ms ease;
-  animation-duration: 360ms;
-  animation-fill-mode: both;
-  animation-timing-function: ease;
-}
-
-.scroll-intro__stage[data-active-index="0"] .scroll-intro__copy {
-  animation-name: scroll-intro-copy-0;
-}
-
-.scroll-intro__stage[data-active-index="1"] .scroll-intro__copy {
-  animation-name: scroll-intro-copy-1;
-}
-
-.scroll-intro__stage[data-active-index="2"] .scroll-intro__copy {
-  animation-name: scroll-intro-copy-2;
-}
-
-.scroll-intro__stage[data-active-index="3"] .scroll-intro__copy {
-  animation-name: scroll-intro-copy-3;
-}
-
-.scroll-intro__stage[data-active-index="4"] .scroll-intro__copy {
-  animation-name: scroll-intro-copy-4;
-}
-
-@keyframes scroll-intro-copy-0 {
-  from {
-    opacity: 0;
-    transform: translateY(1.5rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scroll-intro-copy-1 {
-  from {
-    opacity: 0;
-    transform: translateY(1.5rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scroll-intro-copy-2 {
-  from {
-    opacity: 0;
-    transform: translateY(1.5rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scroll-intro-copy-3 {
-  from {
-    opacity: 0;
-    transform: translateY(1.5rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scroll-intro-copy-4 {
-  from {
-    opacity: 0;
-    transform: translateY(1.5rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  opacity: 1;
+  transform: none;
 }
 
 .scroll-intro__label {
