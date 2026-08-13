@@ -1,13 +1,16 @@
 export const INTRO_FRAME_COUNT = 181;
 export const INTRO_ANCHOR_FRAMES = Object.freeze([0, 45, 90, 135, 180]);
 
-export function progressToIntroSegment(progress, segmentCount) {
+export function progressToIntroSegment(progress, segmentCount, sceneCount) {
   const safeSegmentCount = Math.max(1, segmentCount);
   const clamped = Math.min(1, Math.max(0, progress));
   const scaled = clamped * safeSegmentCount;
   const segmentIndex = Math.min(safeSegmentCount - 1, Math.floor(scaled));
   const localProgress = clamped === 1 ? 1 : scaled - segmentIndex;
-  const sceneIndex = localProgress === 1 ? segmentIndex + 1 : segmentIndex;
+  const resolvedScene = localProgress === 1 ? segmentIndex + 1 : segmentIndex;
+  const sceneIndex = Number.isFinite(sceneCount)
+    ? Math.min(sceneCount - 1, resolvedScene)
+    : resolvedScene;
 
   return { segmentIndex, localProgress, sceneIndex };
 }

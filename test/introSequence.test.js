@@ -83,6 +83,19 @@ test("scroll progress resolves to a transition and local scrub progress", () => 
   });
 });
 
+test("the City ending interval keeps the final scene active", () => {
+  assert.deepEqual(sequence.progressToIntroSegment(0.8, 5, 5), {
+    segmentIndex: 4,
+    localProgress: 0,
+    sceneIndex: 4,
+  });
+  assert.deepEqual(sequence.progressToIntroSegment(1, 5, 5), {
+    segmentIndex: 4,
+    localProgress: 1,
+    sceneIndex: 4,
+  });
+});
+
 test("strict-mode ref cleanup ignores unmounted video elements", () => {
   const first = { id: "first" };
   const second = { id: "second" };

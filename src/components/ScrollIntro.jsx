@@ -10,7 +10,6 @@ export default function ScrollIntro() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
-  const canvasRef = useRef(null);
   const videoRefs = useRef([]);
   const sectionRef = useRef(null);
   const activeScene = INTRO_SCENES[activeIndex];
@@ -18,7 +17,6 @@ export default function ScrollIntro() {
     setActiveIndex(scene);
   }, []);
   useIntroCanvas({
-    canvasRef,
     videoRefs,
     sectionRef,
     reducedMotion,
@@ -79,11 +77,6 @@ export default function ScrollIntro() {
                 </video>
               ))}
             </div>
-            <canvas
-              className="scroll-intro__canvas"
-              ref={canvasRef}
-              aria-hidden="true"
-            />
           </>
         )}
         <div className="scroll-intro__copy">

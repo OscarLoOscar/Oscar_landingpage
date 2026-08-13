@@ -10,4 +10,6 @@ export const INTRO_TRANSITIONS = [
   "assets/videos/intro/cafe-room.mp4",
   "assets/videos/intro/room-office.mp4",
   "assets/videos/intro/office-estate.mp4",
+  "assets/videos/intro/estate-city.mp4",
+  "assets/videos/intro/city-ending.mp4",
 ];
