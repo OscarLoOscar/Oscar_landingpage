@@ -527,14 +527,6 @@ button {
     transform: scale(0.5);
   }
 
-  .scroll-intro,
-  .scroll-intro__stage {
-    height: 100dvh;
-  }
-
-  .scroll-intro__step {
-    display: none;
-  }
 }
 
 /* ── Shared sections ── */

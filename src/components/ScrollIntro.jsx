@@ -61,24 +61,20 @@ export default function ScrollIntro() {
             fetchPriority={activeIndex === 0 ? "high" : "auto"}
           />
         </picture>
-        {!reducedMotion && (
-          <>
-            <div className="scroll-intro__videos" aria-hidden="true">
-              {INTRO_TRANSITIONS.map((src, index) => (
-                <video
-                  key={src}
-                  className="scroll-intro__video"
-                  ref={(node) => { videoRefs.current[index] = node; }}
-                  muted
-                  playsInline
-                  preload={index === 0 ? "auto" : "metadata"}
-                >
-                  <source src={assetUrl(src)} type="video/mp4" />
-                </video>
-              ))}
-            </div>
-          </>
-        )}
+        <div className="scroll-intro__videos" aria-hidden="true">
+          {INTRO_TRANSITIONS.map((src, index) => (
+            <video
+              key={src}
+              className="scroll-intro__video"
+              ref={(node) => { videoRefs.current[index] = node; }}
+              muted
+              playsInline
+              preload="auto"
+            >
+              <source src={assetUrl(src)} type="video/mp4" />
+            </video>
+          ))}
+        </div>
         <div className="scroll-intro__copy">
           <p className="scroll-intro__label">{activeScene.label}</p>
           <h1 className="scroll-intro__title">{activeScene.title}</h1>

@@ -15,8 +15,6 @@ export function useIntroCanvas({
   onSceneArrive,
 }) {
   useEffect(() => {
-    if (reducedMotion) return undefined;
-
     const section = sectionRef.current;
     const videos = getMountedMediaElements(videoRefs.current);
     if (!section || videos.length !== VIDEO_SEGMENT_COUNT) return undefined;
