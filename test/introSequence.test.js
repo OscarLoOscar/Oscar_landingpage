@@ -110,3 +110,10 @@ test("inactive transition videos stay pinned to their nearest anchor", () => {
   assert.equal(sequence.getMediaProgress(1, 0.4, 1), 0.4);
   assert.equal(sequence.getMediaProgress(1, 0.4, 2), 0);
 });
+
+test("intro section scroll maps continuously from zero to one", () => {
+  assert.equal(sequence.getSectionScrollFraction({ top: 0, height: 6000 }, 1000), 0);
+  assert.equal(sequence.getSectionScrollFraction({ top: -2500, height: 6000 }, 1000), 0.5);
+  assert.equal(sequence.getSectionScrollFraction({ top: -5000, height: 6000 }, 1000), 1);
+  assert.equal(sequence.getSectionScrollFraction({ top: -7000, height: 6000 }, 1000), 1);
+});

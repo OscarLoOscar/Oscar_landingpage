@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import {
   getMediaProgress,
   getMountedMediaElements,
+  getSectionScrollFraction,
   progressToIntroSegment,
 } from "../utils/introSequence";
 
@@ -36,10 +37,8 @@ export function useIntroCanvas({
     const render = () => {
       animationFrameId = null;
       const rect = section.getBoundingClientRect();
-      const scrollableHeight = rect.height - window.innerHeight;
-      const progress = scrollableHeight > 0
-        ? Math.min(1, Math.max(0, -rect.top / scrollableHeight))
-        : 0;
+      const progress = getSectionScrollFraction(rect, window.innerHeight);
+      section.dataset.scrollFraction = progress.toFixed(4);
       const { segmentIndex, localProgress, sceneIndex } = progressToIntroSegment(
         progress,
         VIDEO_SEGMENT_COUNT,

@@ -25,6 +25,13 @@ export function getMediaProgress(segmentIndex, localProgress, mediaIndex) {
   return localProgress;
 }
 
+export function getSectionScrollFraction(sectionRect, viewportHeight) {
+  const scrollableHeight = sectionRect.height - viewportHeight;
+  if (scrollableHeight <= 0) return 0;
+
+  return Math.min(1, Math.max(0, -sectionRect.top / scrollableHeight));
+}
+
 export function progressToFrame(progress, frameCount = INTRO_FRAME_COUNT) {
   const clamped = Math.min(1, Math.max(0, progress));
   return Math.round(clamped * (frameCount - 1));
