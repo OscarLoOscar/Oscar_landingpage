@@ -47,7 +47,7 @@ export default function About() {
         </div>
         <div
           className="about-split__visual"
-          style={{ backgroundImage: `url('${assetUrl("assets/images/02_linkin.png")}')` }}
+          style={{ backgroundImage: `url('${assetUrl("assets/images/dual-world/10.png")}')` }}
           aria-hidden="true"
         ></div>
       </div>

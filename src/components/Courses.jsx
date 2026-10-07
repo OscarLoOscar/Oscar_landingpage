@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { assetUrl } from "../utils/assetUrl";
 import CourseCompareList from "./CourseCompareList";
 import CourseContactCta from "./CourseContactCta";
@@ -122,6 +122,32 @@ const VIBE_IMAGES = [
 export default function Courses() {
   const [activeTab, setActiveTab] = useState("secondary");
   const [lightbox, setLightbox] = useState(null);
+  const panelsRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (activeTab !== "primary") return;
+    const panels = panelsRef.current;
+    const reference = panels.querySelector("#panel-vibe-coding");
+    const syncHeight = () => {
+      if (window.innerWidth <= 768) {
+        panels.style.removeProperty("--primary-panel-height");
+        return;
+      }
+      const previousStyle = reference.getAttribute("style");
+      Object.assign(reference.style, {
+        display: "block", position: "absolute", visibility: "hidden",
+        width: `${panels.clientWidth}px`, pointerEvents: "none",
+      });
+      const height = reference.querySelector(".course-split").getBoundingClientRect().height;
+      if (previousStyle === null) reference.removeAttribute("style");
+      else reference.setAttribute("style", previousStyle);
+      panels.style.setProperty("--primary-panel-height", `${height}px`);
+    };
+    syncHeight();
+    const observer = new ResizeObserver(syncHeight);
+    observer.observe(panels);
+    return () => observer.disconnect();
+  }, [activeTab]);
 
   const openLightbox = (gallery, index) => {
     setLightbox({ gallery, index });
@@ -135,6 +161,7 @@ export default function Courses() {
 
   return (
     <section className="courses" id="courses" aria-labelledby="courses-heading">
+      <img className="courses__world" src={assetUrl("assets/images/dual-world/8.png")} alt="工程師以手勢將後端技術連結到清晰教學流程" loading="lazy" />
       <div className="courses__intro">
         <span className="divider">+</span>
         <h2 id="courses-heading" className="section-title">
@@ -186,7 +213,7 @@ export default function Courses() {
         ))}
       </div>
 
-      <div className="course-panels">
+      <div className="course-panels" ref={panelsRef}>
         <article
           className={`course-panel${activeTab === "secondary" ? " is-active" : ""}`}
           id="panel-secondary"
