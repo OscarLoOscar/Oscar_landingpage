@@ -51,6 +51,14 @@ export default function About() {
           aria-hidden="true"
         ></div>
       </div>
+      <nav className="about-resources" aria-label="AI resources">
+        <a className="btn-outline" href="https://oscarlooscar.github.io/new_prompt-landing-page/" target="_blank" rel="noopener noreferrer">
+          Prompt 指令庫 ↗
+        </a>
+        <a className="btn-outline" href="https://oscarlooscar.github.io/GoogleNotebookHTML/" target="_blank" rel="noopener noreferrer">
+          Google Notebook ↗
+        </a>
+      </nav>
     </section>
   );
 }

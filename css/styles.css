@@ -2081,3 +2081,27 @@ body {
 .project-architecture ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.4rem; }
 .project-architecture li { position: relative; padding: .75rem; border: 1px solid rgba(11,18,32,.25); background: rgba(255,253,248,.8); text-align: center; font-size: .85rem; line-height: 1.5; overflow-wrap: anywhere; }
 .project-architecture li + li::before { content: "↓"; position: absolute; left: 50%; top: -1.5rem; transform: translateX(-50%); color: var(--navy); }
+
+/* Resource links below the About columns. */
+.about-resources {
+  display: grid;
+  gap: 1rem;
+  width: 75%;
+  max-width: calc(var(--content-max) * 0.75);
+  margin: 2rem auto 0;
+}
+
+.about-resources .btn-outline {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+}
+
+.about-resources .btn-outline:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .about-resources { width: 100%; max-width: none; }
+}
