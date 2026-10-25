@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { assetUrl } from "../utils/assetUrl";
 import CourseCompareList from "./CourseCompareList";
 import CourseContactCta from "./CourseContactCta";
@@ -63,7 +63,7 @@ const FORMAT_LADDER = [
   {
     meta: "全日",
     title: "實作工作坊",
-    text: "即場做 project、整理 use case、完成 deliverable，適合 Vibe Coding、企業培訓或數字人廣告。",
+    text: "即場做 project、整理 use case、完成 deliverable，適合 Vibe Coding 或數字人廣告。",
   },
 ];
 
@@ -124,6 +124,21 @@ export default function Courses() {
   const [lightbox, setLightbox] = useState(null);
   const panelsRef = useRef(null);
 
+  useEffect(() => {
+    const openCorporate = () => {
+      if (window.location.hash.startsWith("#corporate-training")) setActiveTab("corporate");
+    };
+    openCorporate();
+    window.addEventListener("hashchange", openCorporate);
+    return () => window.removeEventListener("hashchange", openCorporate);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (activeTab === "corporate" && window.location.hash.startsWith("#corporate-training")) {
+      document.getElementById(window.location.hash.slice(1))?.scrollIntoView();
+    }
+  }, [activeTab]);
+
   useLayoutEffect(() => {
     if (activeTab !== "primary") return;
     const panels = panelsRef.current;
@@ -171,6 +186,9 @@ export default function Courses() {
         <p className="section-lead">
           為中學生、小學生、成年人及企業而設，按年齡、程度同需要調整內容與節奏。
         </p>
+        <a className="btn-outline logistics-entry" href="#corporate-training" onClick={() => setActiveTab("corporate")}>
+          企業培訓 · 物流 AI 實戰 · 36 小時 ↓
+        </a>
       </div>
 
       <CourseCompareList
@@ -183,7 +201,7 @@ export default function Courses() {
         <p className="label">課程形式 / 時長</p>
         <span className="divider">+</span>
         <p className="section-lead">
-          可按對象同目標自由組合：由短試堂開始，到系列課、12 小時實用班，或者全日實作 workshop。
+          按對象提供體驗課、系列課、12 小時實用班及全日工作坊；物流企業培訓為 36 小時（實習時間按學員程度計算）。
         </p>
         <div className="course-formats__grid">
           {FORMAT_LADDER.map((format) => (

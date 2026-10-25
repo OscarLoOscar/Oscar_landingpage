@@ -53,6 +53,7 @@ export default function Hero() {
       <div className="hero__content">
         <p className="hero__eyebrow">Oscar Lo · Backend Engineer · AI Educator</p>
         <h1 className="hero__subtitle">寫好系統，<br />教懂 AI。</h1>
+        <a className="hero__enterprise" href="#corporate-training">企業培訓 · 物流 AI 實戰 <span aria-hidden="true">↗</span></a>
       </div>
       <nav className="hero__portals" aria-label="探索工程與教學">
         <a className="hero__portal hero__portal--code" href="#projects"><span>ENGINEERING</span>睇工程作品 <span aria-hidden="true">↗</span></a>

@@ -1,317 +1,134 @@
 import { LINKS } from "../constants/links";
+import trainingIllustration from "../../assets/images/logistics-training-illustrated.png";
+
+import practicePack from "../../assets/training/logistics-workflow-practice.md?url";
 
 export default function CorporateTraining() {
   return (
-    <div className="course-corporate">
-      <div className="course-corporate__hero">
-        <span className="divider">+</span>
-        <p className="label">企業 AI 培訓｜Workflow 設計｜實戰工作坊</p>
-        <span className="divider">+</span>
-        <h3 className="course-split__title">
-          企業 GenAI 培訓
-          <br />
-          幫 team 把 AI 用喺日常工作
-        </h3>
-        <span className="divider">+</span>
-        <p className="course-corporate__text">
-          為公司同機構度身安排實戰型 GenAI 培訓，唔係教員工死背 prompt 或者追新工具，而係幫團隊建立共用嘅 AI
-          思維、互動習慣、輸出判斷同可落地 workflow。內容會按部門角色、學員底子同實際工作場景調整，涵蓋文件處理、資料整理、簡報溝通、數據分析、Agent
-          應用同流程自動化，令 AI 變成 team 可以長期沿用嘅工作方法。
-        </p>
-        <p className="course-corporate__text">
-          可以由 2-3 小時主題班開始，亦可以安排多節系列課、定期 AI 分享會，或者全日實作 workshop，按你哋嘅節奏同目標組合。
-        </p>
+    <div className="course-corporate" id="corporate-training">
+      <header className="course-corporate__hero logistics-intro">
+        <p className="label">企業 AI 培訓 · 物流文件實戰</p>
+        <h3 className="course-split__title">由一張貨運文件，<br />建立一套團隊用得返嘅流程。</h3>
+        <p className="course-corporate__text">已經用 AI 寫 prompt，下一步點樣接入日常工作？用物流公司嘅文件整理場景，練習資料抽取、欄位對照、Excel 填寫同人工覆核，將每次重新提問變成可以重複操作嘅工作方法。</p>
+        <p className="logistics-duration">36 小時<span>（實習時間按學員程度計算）</span></p>
         <div className="course-corporate__actions">
-          <a
-            className="btn-outline"
-            href={LINKS.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            查詢企業培訓
-          </a>
-          <a className="btn-outline" href="#corporate-training-formats">
-            了解培訓形式
-          </a>
+          <a className="btn-outline" href={LINKS.instagram} target="_blank" rel="noopener noreferrer">需求查詢 · 企業培訓</a>
+          <a className="course-contact__link" href="#corporate-training-formats">睇課程安排 ↓</a>
         </div>
-        <p className="course-corporate__tags">短班 · 系列課 · 定期 session · 全日實作</p>
-        <p className="course-corporate__tags">以真實部門 workflow 出發設計培訓</p>
-      </div>
+      </header>
 
-      <div className="course-corporate__section">
-        <span className="divider">+</span>
-        <p className="label">培訓框架</p>
-        <span className="divider">+</span>
-        <p className="course-corporate__text course-corporate__text--center">
-          由公司實際問題入手，設計可以即場練、可以判斷、可以帶返 office 用嘅 AI 方法。
-        </p>
-        <div className="course-corporate__grid course-corporate__grid--3">
-          <article className="card">
-            <p className="card__meta">思維</p>
-            <h4 className="card__title">AI 思維</h4>
-            <p className="card__text">學識拆 task、問清楚問題、檢查 AI 輸出</p>
-          </article>
-          <article className="card">
-            <p className="card__meta">流程</p>
-            <h4 className="card__title">AI Workflow</h4>
-            <p className="card__text">接入報告、簡報、研究同日常數據工作</p>
-          </article>
-          <article className="card">
-            <p className="card__meta">進階</p>
-            <h4 className="card__title">Agent 與自動化</h4>
-            <p className="card__text">了解 Agent、流程自動化同可控設計</p>
-          </article>
-        </div>
-      </div>
+      <section className="course-corporate__section logistics-section">
+        <p className="label">由工作痛點開始</p>
+        <h4 className="course-corporate__heading">文件格式唔同，唔代表每次都要由頭入過。</h4>
+        <dl className="logistics-rows">
+          <div><dt>重複輸入</dt><dd>客戶文件格式各異，人手搵欄位再打入公司表格。練習先整理資料，再按固定對照表填寫。</dd></div>
+          <div><dt>費用分類</dt><dd>發票描述各有寫法，要逐項對應公司分類。練習保留每筆原文、按分類表入欄，唔清楚嘅類別先標記。</dd></div>
+          <div><dt>資料難核對</dt><dd>多項貨物、缺欄位同金額差異容易漏睇。用檢查清單逐項對原文，唔清楚嘅位置交返指定同事確認。</dd></div>
+          <div><dt>做完難重用</dt><dd>每個同事各自試 prompt，結果難接手。將步驟、填寫規則同交付格式記錄成團隊共用方法。</dd></div>
+        </dl>
+      </section>
 
-      <div className="course-corporate__section">
-        <span className="divider">+</span>
-        <h4 className="course-corporate__heading">企業 AI 培訓要對準真正痛點</h4>
-        <span className="divider">+</span>
-        <p className="course-corporate__text course-corporate__text--center">
-          好多 team 已經試過 ChatGPT、Gemini 或者其他 AI 工具，但未必用得穩、用得一致。
-          <br />
-          問題通常唔係「識唔識多幾個 app」，而係有冇共用方法、輸出標準、風險意識，同埋可唔可以真正嵌入部門 workflow。
-        </p>
-        <p className="label">現況評估</p>
-        <h4 className="course-corporate__subheading">先了解現況，再定培訓重點</h4>
-        <p className="course-corporate__text course-corporate__text--center">
-          企業培訓應該先搞清楚 team 卡喺邊，再決定要補邊一類 AI 能力。
-        </p>
-        <p className="course-corporate__slogan">
-          先診斷。
-          <br />
-          再有目標地教。
-        </p>
-        <div className="course-corporate__table-wrap">
-          <table className="course-corporate__table">
-            <thead>
-              <tr>
-                <th scope="col">常見現象</th>
-                <th scope="col">核心問題</th>
-                <th scope="col">培訓要補嘅能力</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>各自為政</td>
-                <td>同事各自試 AI，但提問方式、輸出格式同檢查標準唔一致。</td>
-                <td>建立 team 共用嘅 task 拆解、互動節奏同輸出 review 標準。</td>
-              </tr>
-              <tr>
-                <td>用唔落實</td>
-                <td>知道 AI 可以寫文、整理資料或做 deck，但唔知點接入實際工作。</td>
-                <td>把 AI 接到 report、PPT、research、data work 同部門日常流程。</td>
-              </tr>
-              <tr>
-                <td>缺判斷力</td>
-                <td>AI 出得快，但 team 未必識追問、修正、核實資料同控制語氣。</td>
-                <td>建立 output review、資料核對、human judgment 同負責任使用習慣。</td>
-              </tr>
-              <tr>
-                <td>想再上一層</td>
-                <td>開始關注 Agent、workflow automation 或 internal tools，但唔想一開始太 technical。</td>
-                <td>理解可行場景、可控流程、限制同 human-in-the-loop 設計。</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <section className="course-corporate__section logistics-section logistics-outcome">
+        <p className="label">完成後做到乜</p>
+        <h4 className="course-corporate__heading">由「識問 AI」，到交到一份有依據嘅表格。</h4>
+        <p className="course-corporate__text">學員會用同一套規則處理另一份練習文件，交出填妥 Excel、欄位對照表、核對清單同操作 SOP。效率改善由減少重複整理開始，同時保留人工核對同異常確認。</p>
+      </section>
 
-      <div className="course-corporate__section">
-        <span className="divider">+</span>
-        <h4 className="course-corporate__heading">
-          我嘅培訓方式：
-          <br />
-          教方法同判斷，唔只教 prompt
-        </h4>
-        <span className="divider">+</span>
-        <p className="course-corporate__text">
-          有效嘅企業 AI 培訓，唔應該淨係 show 工具或者派 template，而係令學員學識拆問題、逐步互動、判斷輸出，再變成可以沿用嘅
-          workflow。
-        </p>
-        <div className="course-corporate__compare-list">
-          <div className="course-corporate__compare">
-            <p className="course-corporate__compare-bad">教員工抄固定 prompt 或句式。</p>
-            <p className="course-corporate__compare-good">教 team 先定目標，再逐步寫出更清楚嘅 AI 指令。</p>
+      <section className="course-corporate__section logistics-section">
+        <p className="label">文件試填案例</p>
+        <h4 className="course-corporate__heading">先睇資料點樣走到 Excel。</h4>
+        <article className="logistics-case">
+          <p className="label">文字文件 → 欄位對照 → Excel</p>
+          <h5>多項貨物，保留原有序號。</h5>
+          <p>以同一間公司提供嘅 9 份 RTF 文件、共 10 項貨物試填：按檔名取得入倉號，將件數對應箱數、商品編號對應海關統計商品，並保留原文序號。未提供嘅資料留空，唔自行推算。</p>
+          <div className="logistics-before-after" aria-label="RTF 到 Excel 欄位對照示意">
+            <div><h6>處理前 · RTF 來源</h6><ul><li>檔名 → 入倉編號來源</li><li>件數、商品編號各有原文欄位</li><li>一份文件可能有多項貨物</li></ul></div>
+            <div><h6>處理後 · Excel 對照</h6><ul><li>入倉號 ← 檔名（不含副檔名）</li><li>箱數 ← 件數</li><li>海關統計商品 ← 商品編號</li><li>逐項填寫，序號保留原文</li></ul></div>
           </div>
-          <div className="course-corporate__compare">
-            <p className="course-corporate__compare-bad">一次過塞晒所有要求，期望 AI 一次搞掂。</p>
-            <p className="course-corporate__compare-good">用短 prompt 分步互動、追問同修正，建立真正嘅人機協作。</p>
+          <p className="logistics-note">欄位流程示意，並非原始文件截圖；客戶資料不公開。</p>
+          <p className="logistics-note">呢批試填結果已由提供資料者確認正確。RTF 本身係文字文件，呢個案例並非 OCR，亦未驗證其他供應商版面。</p>
+        </article>
+        <article className="logistics-case">
+          <p className="label">模擬發票 → OCR → 費用分類</p>
+          <h5>由發票擷取資料，填入同一工作簿嘅新工作表。</h5>
+          <p>使用虛構交易資料製作嘅發票，擷取主提單號碼、所有費用描述同金額，再按指定欄位分類填寫。示範包含 5 項費用，合計 HK$2,034，結果已核對。</p>
+          <div className="logistics-before-after" aria-label="發票到分類工作表示意">
+            <div><h6>處理前 · 模擬發票</h6><ul><li>主提單號碼</li><li>5 項費用描述及各項金額</li><li>需要按公司分類表對應</li></ul></div>
+            <div><h6>處理後 · 同一工作簿新工作表</h6><ul><li>主提單號碼對應指定欄位</li><li>每項費用保留描述、分類及金額</li><li>核對合計：HK$2,034</li></ul></div>
           </div>
-          <div className="course-corporate__compare">
-            <p className="course-corporate__compare-bad">工具 list 愈長愈好，學完仍然唔知日常用邊個。</p>
-            <p className="course-corporate__compare-good">按部門場景揀少量合適工具，專注解決真實工作問題。</p>
-          </div>
-          <div className="course-corporate__compare">
-            <p className="course-corporate__compare-bad">只做 demo，睇完覺得有趣但返 office 唔知點做。</p>
-            <p className="course-corporate__compare-good">幫 team 把 AI 放入實際 workflow，形成可重用、可判斷、可落地嘅方法。</p>
-          </div>
-        </div>
-      </div>
+          <p className="logistics-note">整理方式示意；不公開原始發票或公司識別資料。</p>
+          <p className="logistics-note">呢份發票用作流程示範；同類費用合併規則仍需按公司要求確認。以上屬案例試驗，並非學員成效或正式系統準確率。</p>
+        </article>
+      </section>
 
-      <div className="course-corporate__section">
-        <span className="divider">+</span>
-        <h4 className="course-corporate__heading">培訓完要有實際產出</h4>
-        <span className="divider">+</span>
-        <p className="course-corporate__text">
-          企業 AI 培訓唔應該止於「識多幾個工具」或者「試過幾個 demo」。更重要係 team 可唔可以將 AI
-          變成日常輸出、資料處理、流程判斷同長期使用嘅方法。
-        </p>
-        <div className="course-corporate__grid course-corporate__grid--3">
-          <article className="card card--feature">
-            <p className="card__meta">01</p>
-            <h4 className="card__title">日常文件與溝通</h4>
-            <p className="card__text">令學員把 AI 用喺文件、簡報同對外溝通，而唔只係試工具。</p>
-            <ul className="card__list">
-              <li>改善 report、PPT、email、proposal、會議紀錄同 executive summary。</li>
-              <li>學識拆 task、定輸出要求、逐步 refine AI 回覆。</li>
-              <li>建立 review 習慣，識追問、修正同改善 AI 內容。</li>
-            </ul>
-          </article>
-          <article className="card card--feature">
-            <p className="card__meta">02</p>
-            <h4 className="card__title">資料整理與分析</h4>
-            <p className="card__text">協助 team 更有效做 research、摘要、數據理解同 business insights。</p>
-            <ul className="card__list">
-              <li>加快資料搜集、來源比較、PDF 摘要同 knowledge notes。</li>
-              <li>用 AI 理解 spreadsheet、整理趨勢，轉成 business insights。</li>
-              <li>把分析整理成清晰建議，支援討論、匯報同決策。</li>
-            </ul>
-          </article>
-          <article className="card card--feature">
-            <p className="card__meta">03</p>
-            <h4 className="card__title">流程優化與進階應用</h4>
-            <p className="card__text">由單一 task 延伸到部門 workflow，逐步探索更高價值嘅 AI 用法。</p>
-            <ul className="card__list">
-              <li>搵出部門 AI use cases，判斷邊啲 task 值得改善或半自動化。</li>
-              <li>理解 Agent、workflow automation 同 human-in-the-loop 嘅可控應用。</li>
-              <li>進階 workshop 可試 dashboard、web app prototype 或 internal tool 概念。</li>
-            </ul>
-          </article>
+      <section className="course-corporate__section logistics-section">
+        <p className="label">可重複操作嘅方法</p>
+        <h4 className="course-corporate__heading">五步完成一次文件處理。</h4>
+        <ol className="logistics-workflow">
+          <li><strong>準備</strong><p>揀文件、遮敏感資料，確認目標表格。</p></li>
+          <li><strong>抽取</strong><p>分清文字檔同掃描檔，保留原文依據。</p></li>
+          <li><strong>對照</strong><p>確認欄位、單位、分類同留空規則。</p></li>
+          <li><strong>入表</strong><p>先填副本，保留工作表同原有格式。</p></li>
+          <li><strong>覆核</strong><p>對序號、件數、金額；異常交人確認。</p></li>
+        </ol>
+        <div className="logistics-comparison">
+          <p><span>只試 prompt</span>每次重新講要求，出到答案就當完成。</p>
+          <p><span>課堂練習方式</span>用固定輸入、欄位規則同核對清單，完成一次後再用另一份文件重做。</p>
         </div>
-      </div>
+      </section>
 
-      <div className="course-corporate__section">
-        <span className="divider">+</span>
-        <h4 className="course-corporate__heading">可按需要組合嘅 GenAI 技能模組</h4>
-        <span className="divider">+</span>
-        <p className="course-corporate__text">
-          以下唔係固定 syllabus，而係可按公司目標、部門工作、學員程度同培訓時數自由組合嘅模組。每個主題都由真實工作 task
-          出發，避免過度 technical，同時保留足夠實作深度。
-        </p>
-        <p className="course-corporate__tags">
-          Prompt 設計 · 資料研究 · 商業溝通 · 數據分析 · Vibe Coding · Agent 與自動化
-        </p>
-        <div className="course-corporate__grid course-corporate__grid--2">
-          <article className="card">
-            <p className="card__meta">A · Prompt 與 Task 設計</p>
-            <h4 className="card__title">拆解任務同設計有效指令</h4>
-            <p className="card__text">用短 prompt 逐步釐清目標、限制、格式、語氣同輸出標準。</p>
-          </article>
-          <article className="card">
-            <p className="card__meta">B · 研究與知識整理</p>
-            <h4 className="card__title">資料搜集、摘要同內部知識管理</h4>
-            <p className="card__text">支援 research、來源比較、PDF 摘要、meeting notes 同 team knowledge base。</p>
-          </article>
-          <article className="card">
-            <p className="card__meta">C · 商業溝通</p>
-            <h4 className="card__title">Report、PPT 同對外匯報</h4>
-            <p className="card__text">協助 report writing、proposal、executive summary、deck structure 同 speaker notes。</p>
-          </article>
-          <article className="card">
-            <p className="card__meta">D · 數據分析</p>
-            <h4 className="card__title">AI 輔助 Data Analysis</h4>
-            <p className="card__text">整理 spreadsheet、找出趨勢，將分析結果轉成 actionable insights。</p>
-          </article>
-          <article className="card">
-            <p className="card__meta">E · Vibe Coding</p>
-            <h4 className="card__title">Dashboard 同 Web App Prototype</h4>
-            <p className="card__text">把想法、資料或流程快速變成 dashboard、web prototype 或 internal tool mockup。</p>
-          </article>
-          <article className="card">
-            <p className="card__meta">F · Agent 與自動化</p>
-            <h4 className="card__title">AI Agent 同 Workflow Automation</h4>
-            <p className="card__text">了解 Agent 場景、流程設計、工具連接同 human-in-the-loop 應用。</p>
-          </article>
-        </div>
-      </div>
+      <figure className="logistics-scene">
+        <img src={trainingIllustration} width="1254" height="1254" loading="lazy" alt="物流公司培訓現場插畫：導師與團隊討論貨運文件及關鍵欄位" />
+        <figcaption><strong>物流公司 · 培訓現場紀錄</strong><span>按實際培訓相片作 AI 插畫處理；用作活動紀錄，並非客戶推薦見證。</span></figcaption>
+      </figure>
 
-      <div className="course-corporate__section">
-        <span className="divider">+</span>
-        <h4 className="course-corporate__heading" id="corporate-training-formats">
-          培訓形式可按公司節奏安排
-        </h4>
-        <span className="divider">+</span>
-        <p className="course-corporate__text">
-          唔同公司同部門對 AI 嘅成熟度、應用目標同可用時間都唔同。可以由一節 2-3 小時開始，亦可以設計成系列課、定期 AI
-          分享會或全日實作 workshop，按 team 節奏建立能力。實際示範同練習工具會按培訓目標、學員程度、公司政策同可用帳戶選用。
-        </p>
-        <div className="course-corporate__grid course-corporate__grid--2">
-          <article className="card">
-            <p className="card__meta">2-3 小時</p>
-            <h4 className="card__title">單節主題班</h4>
-            <p className="card__text">
-              適合想快速建立共同 AI 語言、啟動 team 導入或做 awareness session 嘅公司。每節可聚焦一個清晰主題，例如 Prompt
-              設計、AI Research、Report / PPT 或 Agent 概覽。
-            </p>
-          </article>
-          <article className="card">
-            <p className="card__meta">系列</p>
-            <h4 className="card__title">多節企業課程</h4>
-            <p className="card__text">
-              適合想有系統地由基礎概念推進到 workflow 應用嘅 team。每節集中一個場景，逐步掌握 task 拆解、工具互動、輸出判斷同流程設計。
-            </p>
-          </article>
-          <article className="card">
-            <p className="card__meta">定期</p>
-            <h4 className="card__title">AI 定期分享會</h4>
-            <p className="card__text">
-              適合需要持續追蹤 AI 趨勢、工具更新同內部應用案例嘅 team。可按月安排短 session，配合新工具、實用 workflow、部門問題同下一步方向。
-            </p>
-          </article>
-          <article className="card">
-            <p className="card__meta">全日</p>
-            <h4 className="card__title">全日實作工作坊</h4>
-            <p className="card__text">
-              適合想集中實作、即場練習同整理部門 use cases 嘅公司。內容可包括示範、分組練習、真實 task 處理、workflow
-              設計同後續落地方向。
-            </p>
-          </article>
-        </div>
-      </div>
+      <section className="course-corporate__section logistics-section">
+        <p className="label">由工程實作帶入教學</p>
+        <h4 className="course-corporate__heading">教文件流程，亦理解系統點樣接手。</h4>
+        <p className="course-corporate__text">我係 Oscar Lo，曾於 IBM 參與企業後端開發，喺 Venturenix Lab 做自動化及教學相關工作，亦有物流 freelance 文件處理、SQL 同 OCR 開發經驗。課堂會將工程上嘅欄位規則、資料追溯同逐步驗證，轉化成團隊可以練習嘅操作方法。</p>
+        <div className="course-corporate__actions"><a className="course-contact__link" href="#experience">睇工作經驗與技術背景 ↗</a></div>
+      </section>
 
-      <div className="course-corporate__section course-corporate__cta">
-        <span className="divider">+</span>
-        <h4 className="course-corporate__heading">想為 team 安排企業 AI 培訓？</h4>
-        <span className="divider">+</span>
-        <p className="course-corporate__text">
-          可以先講公司背景同培訓目標，唔使已有完整 syllabus。我會按 team 程度、工作場景同時間，建議合適嘅培訓形式。
-        </p>
-        <div className="course-corporate__actions">
-          <a
-            className="btn-outline"
-            href={LINKS.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {LINKS.instagramLabel}
-          </a>
-        </div>
-        <p className="course-corporate__tags">
-          2-3 小時主題班｜系列課程｜定期 AI session｜全日實作 workshop
-        </p>
-        <span className="divider">+</span>
-        <h4 className="course-corporate__subheading">查詢前可簡單準備</h4>
-        <ul className="course-list course-corporate__checklist">
-          <li>公司 / 機構背景</li>
-          <li>預計人數同學員程度</li>
-          <li>最想解決嘅工作問題</li>
-          <li>想涵蓋嘅主題同工具</li>
-          <li>偏好形式、日期同時間</li>
-        </ul>
-        <span className="divider">+</span>
-      </div>
+      <section className="course-corporate__section logistics-section" id="corporate-training-formats">
+        <p className="label">課程安排</p>
+        <h4 className="course-corporate__heading">36 小時，由跟住做到自己重做。</h4>
+        <p className="course-corporate__text">實習時間按學員程度計算。適合識基本 Excel、已試過 AI 提問，但未建立共用流程嘅物流團隊。</p>
+        <dl className="logistics-rows">
+          <div><dt>建立規則</dt><dd>認識文件種類與目標表格，練習遮資料、抽取欄位、記錄來源，建立欄位對照表。</dd></div>
+          <div><dt>完成試填</dt><dd>練習多項貨物、缺資料、費用分類與 Excel 匯入；以副本操作，核對原文及總數。</dd></div>
+          <div><dt>重做與交接</dt><dd>換文件重做，記錄異常處理方式，整理可交接嘅操作步驟及核對清單。</dd></div>
+        </dl>
+        <div className="logistics-deliverables"><h5>學員最終帶走</h5><ul><li>填妥嘅 Excel 練習副本</li><li>欄位對照表：來源、目標、填寫規則</li><li>核對清單：必查項目、異常及確認人</li><li>操作 SOP：處理次序、留空規則同交接方法</li></ul></div>
+      </section>
+
+      <section className="course-corporate__section logistics-section logistics-offer">
+        <p className="label">教材與驗收</p>
+        <h4 className="course-corporate__heading">帶走範本，換一份文件繼續用。</h4>
+        <dl className="logistics-rows">
+          <div><dt>教材與範本</dt><dd>文件處理 SOP、欄位對照表、核對清單，以及抽取、填表、覆核三組可重用指令。</dd></div>
+          <div><dt>實作練習</dt><dd>由示範跟做到換文件獨立重做，練習多項貨物、資料缺漏同費用分類，再由同伴覆核。</dd></div>
+          <div><dt>驗收標準</dt><dd>貨物及費用行齊全、欄位可追溯原文、金額已核對、異常有記錄，而且另一位同事可以跟 SOP 重做。</dd></div>
+        </dl>
+        <div className="course-corporate__actions"><a className="btn-outline" href={practicePack} download="物流AI文件處理練習包.md">下載練習包 · Markdown</a></div>
+        <p className="logistics-note">提供可編輯文字範本；Excel 練習副本由課堂按指定表格完成，下載包不包含客戶文件。</p>
+      </section>
+
+      <section className="course-corporate__section logistics-section logistics-faq">
+        <p className="label">報名前想了解</p>
+        <h4 className="course-corporate__heading">常見問題</h4>
+        <details><summary>要識寫程式先學到？</summary><p>唔需要。以識基本 Excel 同檔案操作為起點，重點係拆解工作、整理規則同檢查結果。</p></details>
+        <details><summary>免費 AI 帳戶可唔可以參加？</summary><p>先以免費帳戶規劃，課前確認公司可用嘅 Copilot、Gemini、ChatGPT 或 NotebookLM。檔案上傳、使用額度同匯出能力按帳戶而異；需要時用文字抽取及手動匯入，唔保證免費版直接編輯 Excel。</p></details>
+        <details><summary>需要提供公司真實文件？</summary><p>可以先用模擬或已遮敏感資料嘅文件。使用公司資料前，先確認內部政策、工具權限同分享範圍。</p></details>
+        <details><summary>36 小時點樣安排？</summary><p>物流培訓內容統一為 36 小時（實習時間按學員程度計算）。分節日期及每節實作安排，會按團隊程度與工作時間確認。</p></details>
+        <details><summary>學完係咪可以全自動處理所有單據？</summary><p>課程交付係可重複操作嘅文件流程。新供應商版面仍需測試；分類不明、資料缺漏或金額不符要由公司指定同事確認。正式串接內部系統需另外評估。</p></details>
+      </section>
+
+      <section className="course-corporate__section course-corporate__cta logistics-enquiry">
+        <p className="label">需求查詢</p>
+        <h4 className="course-corporate__heading">由你哋最花時間嘅一份文件開始。</h4>
+        <p className="course-corporate__text">透過 Instagram 聯絡宏業創科教育，簡單講團隊人數、AI 使用程度、可用工具同想改善嘅文件工作。初次查詢毋須傳送機密文件。</p>
+        <div className="course-corporate__actions"><a className="btn-outline" href={LINKS.instagram} target="_blank" rel="noopener noreferrer">需求查詢 · 提交工作流程需求</a></div>
+      </section>
     </div>
   );
 }

@@ -11,12 +11,12 @@ export default function CourseContactCta() {
       </p>
       <ul className="course-list course-contact__checklist">
         <li>對象：小學 / 中學 / 大人 / 企業團隊</li>
-        <li>想了解：試堂、系列課、12 小時班或全日 workshop</li>
+        <li>想了解：試堂、系列課、12 小時班、全日 workshop 或 36 小時物流培訓</li>
         <li>可準備：人數、程度、想解決嘅問題同偏好時間</li>
       </ul>
       <div className="course-contact__actions">
         <a className="btn-outline" href={LINKS.instagram} target="_blank" rel="noopener noreferrer">
-          {LINKS.instagramLabel}
+          需求查詢 · 宏業創科教育
         </a>
         <a className="btn-outline" href={LINKS.github} target="_blank" rel="noopener noreferrer">
           GitHub

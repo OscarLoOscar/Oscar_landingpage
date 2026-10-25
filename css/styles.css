@@ -2105,3 +2105,146 @@ body {
 @media (max-width: 768px) {
   .about-resources { width: 100%; max-width: none; }
 }
+
+/* Shared background for existing and future course tabs and panels. */
+.course-tabs,
+.course-panel,
+.course-panel .course-split,
+.course-panel .course-split__body,
+.course-panel .course-corporate,
+.course-panel .course-corporate__hero,
+.course-panel .course-corporate__section,
+.course-panel .logistics-scene {
+  background-color: #FFFDF8;
+}
+
+/* Logistics training: document cases, repeatable workflow and enquiry. */
+#corporate-training,
+#corporate-training-formats { scroll-margin-top: 2rem; }
+.logistics-entry { margin-top: 1.5rem; }
+.logistics-intro { padding: clamp(1.5rem, 5vw, 4rem); text-align: center; }
+.logistics-intro .course-split__title { max-width: 24ch; margin: 1rem auto 1.5rem; text-wrap: balance; }
+.logistics-duration { color: var(--navy); font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 700; margin: 1.5rem 0; }
+.logistics-duration span { display: block; font-size: .9rem; font-weight: 400; margin-top: .5rem; }
+.logistics-section { padding: clamp(1rem, 3vw, 2rem) 0; }
+.logistics-section > .label { text-align: center; }
+.logistics-rows { margin: 1.75rem 0 0; }
+.logistics-rows > div { display: grid; grid-template-columns: minmax(7rem, 1fr) 3fr; gap: 1.5rem; padding: 1.5rem 0; border-top: 1px solid #b9954a55; }
+.logistics-rows dt { color: var(--navy); font-weight: 700; }
+.logistics-rows dd { margin: 0; line-height: 1.8; }
+.logistics-case { border-left: 3px solid #b9954a; padding: .5rem 0 .5rem 1.5rem; margin-top: 2rem; }
+.logistics-case h5, .logistics-deliverables h5 { font-size: 1.25rem; color: var(--navy); margin: .5rem 0 1rem; }
+.logistics-case p { line-height: 1.85; }
+.logistics-note { font-size: .85rem; color: var(--gray-700); margin-top: 1rem; }
+.logistics-workflow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; padding: 0; list-style-position: inside; margin: 2rem 0; }
+.logistics-workflow li { border-top: 2px solid #b9954a; padding-top: 1rem; }
+.logistics-workflow li::marker { color: #94712d; font-weight: 700; }
+.logistics-workflow p { font-size: .9rem; line-height: 1.75; margin-top: .65rem; }
+.logistics-comparison { border-block: 1px solid #b9954a55; padding: 1rem 0; }
+.logistics-comparison p { margin: .75rem 0; line-height: 1.8; }
+.logistics-comparison span { display: inline-block; min-width: 10rem; font-weight: 700; color: var(--navy); }
+.logistics-scene { display: grid; grid-template-columns: 1.4fr 1fr; align-items: center; gap: 2rem; margin: 2rem 0 3rem; }
+.logistics-scene img { display: block; width: 100%; height: auto; border-radius: .75rem; }
+.logistics-scene figcaption { line-height: 1.8; }
+.logistics-scene figcaption strong { display: block; font-size: 1.25rem; color: var(--navy); margin-bottom: .75rem; }
+.logistics-scene figcaption span { font-size: .85rem; }
+.logistics-deliverables { background: #b9954a12; padding: 1.5rem; margin-top: 1.5rem; }
+.logistics-deliverables ul { padding-left: 1.25rem; line-height: 2; }
+.logistics-faq details { border-bottom: 1px solid #b9954a55; padding: 1.25rem 0; }
+.logistics-faq summary { cursor: pointer; font-weight: 600; color: var(--navy); }
+.logistics-faq details p { margin: 1rem 0 0; line-height: 1.85; max-width: 65ch; }
+.logistics-faq summary:focus-visible { outline: 2px solid #94712d; outline-offset: 5px; }
+.logistics-enquiry { text-align: center; padding: 2rem 1rem; }
+@media (max-width: 768px) {
+  .logistics-workflow { grid-template-columns: 1fr; gap: 1rem; }
+  .logistics-workflow p { margin-bottom: 0; }
+  .logistics-rows > div { grid-template-columns: 1fr; gap: .5rem; }
+  .logistics-scene { grid-template-columns: 1fr; gap: 1rem; }
+  .logistics-comparison span { display: block; }
+  .logistics-case { padding-left: 1rem; }
+}
+
+/* Enterprise entry retains the two existing portfolio routes. */
+.hero__enterprise {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: .8rem 1rem;
+  background: #FFFDF8;
+  border: 1px solid #b9954a;
+  color: var(--navy);
+  font-size: .95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.hero__enterprise:hover { text-decoration: underline; text-underline-offset: .25em; }
+.hero__enterprise:focus-visible { outline: 3px solid #94712d; outline-offset: 4px; }
+.logistics-before-after { display: grid; grid-template-columns: 1fr 1fr; margin-top: 1.5rem; border-block: 1px solid #b9954a55; }
+.logistics-before-after > div { padding: 1.25rem; }
+.logistics-before-after > div + div { border-left: 1px solid #b9954a55; }
+.logistics-before-after h6 { font-size: 1rem; color: var(--navy); margin: 0 0 .75rem; }
+.logistics-before-after ul { padding-left: 1.25rem; line-height: 1.9; }
+.logistics-offer > .logistics-note { text-align: center; }
+@media (max-width: 768px) {
+  .hero__enterprise { font-size: .85rem; margin-top: 1rem; }
+  .logistics-before-after { grid-template-columns: 1fr; }
+  .logistics-before-after > div + div { border-left: 0; border-top: 1px solid #b9954a55; }
+}
+
+/* Course suitability: the supplied comparison, in the existing light palette. */
+.course-suitability {
+  max-width: var(--content-max);
+  margin: 0 auto clamp(3rem, 6vw, 5rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: #FFFDF8;
+  text-align: left;
+}
+.course-suitability__intro { display: flex; align-items: center; gap: .75rem; margin: 0 0 1rem; color: #806020; font-size: .8rem; font-weight: 700; letter-spacing: .08em; }
+.course-suitability__intro::before { content: ""; width: 1.25rem; height: 2px; background: currentColor; }
+.course-suitability h3 { margin: 0 0 1.5rem; color: var(--navy); font-size: clamp(1.6rem, 3vw, 2.5rem); line-height: 1.35; font-weight: 800; text-wrap: balance; }
+.course-suitability__columns { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.course-suitability__group { padding: clamp(1.1rem, 2vw, 1.5rem); border: 1px solid; border-radius: 16px; }
+.course-suitability__group--yes { border-color: #6c9e7b; }
+.course-suitability__group--no { border-color: #c38b84; }
+.course-suitability h4 { margin: 0 0 1rem; font-size: 1.1rem; line-height: 1.5; font-weight: 750; }
+.course-suitability__group--yes h4 { color: #207044; }
+.course-suitability__group--no h4 { color: #a23b36; }
+.course-suitability ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .8rem; }
+.course-suitability li { display: flex; align-items: flex-start; gap: .65rem; color: var(--navy); font-size: .95rem; line-height: 1.75; }
+.course-suitability li::before { content: none; }
+.course-suitability li img { flex: 0 0 20px; margin-top: .2rem; }
+.course-suitability li strong { font-weight: 600; }
+.course-suitability ::selection { color: #FFFDF8; background: #207044; }
+@media (max-width: 768px) {
+  .course-suitability__columns { grid-template-columns: 1fr; }
+}
+
+/* Match the primary gallery's natural image sizing on phones. */
+@media (max-width: 768px) {
+  #panel-vibe-coding .course-split__visual--scroll {
+    width: 100%;
+    height: auto;
+    min-width: 0;
+  }
+  #panel-vibe-coding .course-split__scroll {
+    height: min(70vh, 640px);
+    max-height: min(70vh, 640px);
+    aspect-ratio: auto;
+  }
+  #panel-vibe-coding .course-split__scroll img,
+  #panel-vibe-coding .course-split__scroll .course-lightbox-trigger {
+    height: auto;
+  }
+  #panel-vibe-coding .course-split__scroll .course-lightbox-trigger {
+    margin-bottom: .75rem;
+  }
+  #panel-vibe-coding .course-split__body .course-list {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  #panel-vibe-coding .course-split__body .course-audience {
+    font-size: .95rem;
+    line-height: 1.75;
+  }
+}
