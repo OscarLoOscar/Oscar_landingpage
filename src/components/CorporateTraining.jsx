@@ -90,7 +90,7 @@ export default function CorporateTraining() {
       </section>
 
       <section className="course-corporate__section logistics-section" id="corporate-training-formats">
-        <p className="label">課程安排</p>
+        <p className="label">課程內容 · 以 36 小時主線展示</p>
         <h4 className="course-corporate__heading">36 小時，由跟住做到自己重做。</h4>
         <p className="course-corporate__text">實習時間按學員程度計算。適合識基本 Excel、已試過 AI 提問，但未建立共用流程嘅物流團隊。</p>
         <dl className="logistics-rows">
