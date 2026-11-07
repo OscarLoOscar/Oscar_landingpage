@@ -1,64 +1,85 @@
-import { assetUrl } from "../utils/assetUrl";
-import { LINKS } from "../constants/links";
-
 export default function About() {
   return (
-    <section className="about" id="about" aria-labelledby="about-heading">
-      <div className="about-split">
-        <div className="about-split__content">
-          <span className="divider">+</span>
-          <p className="label">About</p>
-          <span className="divider">+</span>
-          <h2 id="about-heading" className="section-title">
-            Oscar Lo
+    <section
+      className="about section-pad"
+      id="about"
+      aria-labelledby="about-heading"
+    >
+      <div className="section-shell about__layout">
+        <div>
+          <p className="label">About Oscar</p>
+          <h2 className="section-title" id="about-heading">
+            技術要講得明，
+            <br />
+            成果要查得到。
           </h2>
-          <span className="divider">+</span>
-          <div className="about-text">
-            <p>
-              I write software with a strong bias toward practical outcomes: faster operations,
-              clearer workflows, and systems that can scale without becoming difficult to maintain.
-            </p>
-            <p>
-              Alongside professional development work, I also teach and mentor. At Venturenix Lab I
-              led daily technical drills for junior developers, and today I continue that educator
-              mindset through AI courses for students and adults.
-            </p>
-            <p>What makes me different is the combination of engineering and communication:</p>
-            <ul>
-              <li>Enterprise backend delivery at IBM</li>
-              <li>Startup automation and full-stack execution at Venturenix Lab</li>
-              <li>A successful transition from service leadership into software engineering</li>
-              <li>Hands-on teaching experience across junior developers, students, and adult learners</li>
-            </ul>
-          </div>
-          <span className="divider">+</span>
-          <div className="about-actions">
-            <a className="btn-outline" href={LINKS.instagram} target="_blank" rel="noopener noreferrer">
-              {LINKS.instagramLabel}
-            </a>
-            <a className="btn-outline" href={LINKS.github} target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-            <a className="btn-outline" href="#course-contact">
-              課程查詢
-            </a>
-          </div>
-          <span className="divider">+</span>
+          <p className="section-lead">
+            由服務業及團隊管理轉型至軟件工程，習慣先理解人點做事，再決定工具點配合。
+          </p>
+          <p className="about__copy">
+            以廣東話、英文及普通話溝通。持續參考 Microsoft AI
+            curricula、Anthropic 同 DAIR.AI
+            等公開教材自學，將來源查證、私隱、評估同人工驗收帶入實作及教學。
+          </p>
         </div>
-        <div
-          className="about-split__visual"
-          style={{ backgroundImage: `url('${assetUrl("assets/images/dual-world/10.png")}')` }}
-          aria-hidden="true"
-        ></div>
+        <div className="about__details">
+          <details>
+            <summary>技術與 AI 工作方法</summary>
+            <dl className="skills-list">
+              <div>
+                <dt>Backend</dt>
+                <dd>
+                  Java · Spring Boot · Python · Django · Microservices · REST
+                  APIs · PyQt5
+                </dd>
+              </div>
+              <div>
+                <dt>Frontend & Data</dt>
+                <dd>JavaScript · React · SQL · PostgreSQL · MySQL · Redis</dd>
+              </div>
+              <div>
+                <dt>Delivery & Quality</dt>
+                <dd>
+                  AWS EC2／SES · Docker · Git／Git Flow · JUnit 5 · Mockito ·
+                  Hamcrest · K6 · SonarQube · reCAPTCHA Enterprise
+                </dd>
+              </div>
+              <div>
+                <dt>AI Workflows</dt>
+                <dd>
+                  Codex · Cursor · ChatGPT · Gemini · Copilot · Grok Bot · Rules
+                  · Skills · MCP · Obsidian；任務拆解、來源查證及生成結果覆核。
+                </dd>
+              </div>
+            </dl>
+          </details>
+          <details>
+            <summary>學歷與進修</summary>
+            <ul className="education-list">
+              <li>
+                <strong>BSc (Hons) in Computing · Wrexham University</strong>
+              </li>
+              <li>
+                <strong>
+                  Qualifi Level 5 Extended Diploma in Information Technology
+                </strong>
+              </li>
+              <li>
+                <strong>SQL for Data Science · UC Davis</strong>
+              </li>
+              <li>
+                <strong>Asana Workflow Specialist</strong>
+              </li>
+              <li>
+                <strong>其他進修</strong>
+                <span>
+                  Data Science（Python）。公開 AI 教材屬自主學習，並非頒授資格。
+                </span>
+              </li>
+            </ul>
+          </details>
+        </div>
       </div>
-      <nav className="about-resources" aria-label="AI resources">
-        <a className="btn-outline" href="https://oscarlooscar.github.io/new_prompt-landing-page/" target="_blank" rel="noopener noreferrer">
-          Prompt 指令庫 ↗
-        </a>
-        <a className="btn-outline" href="https://oscarlooscar.github.io/GoogleNotebookHTML/" target="_blank" rel="noopener noreferrer">
-          Google Notebook ↗
-        </a>
-      </nav>
     </section>
   );
 }

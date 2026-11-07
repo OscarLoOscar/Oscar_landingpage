@@ -1,29 +1,9 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { assetUrl } from "../utils/assetUrl";
 import CourseCompareList from "./CourseCompareList";
-import CourseContactCta from "./CourseContactCta";
 import CourseLightboxImage from "./CourseLightboxImage";
 import CorporateTraining from "./CorporateTraining";
 import Lightbox from "./Lightbox";
-
-const TEACHING_PHILOSOPHY = [
-  {
-    bad: "把 AI 當作「標準答案機」，抄完就算。",
-    good: "教學員先理解問題，再用 AI 輔助思考、整理同修正。",
-  },
-  {
-    bad: "一次過丟晒所有要求，期望 AI 幫你完成成件事。",
-    good: "分步提問、逐步收窄範圍，建立可重複嘅互動習慣。",
-  },
-  {
-    bad: "工具名單愈長愈好，學完仍然唔知點樣用喺自己場景。",
-    good: "按學員年齡同用途揀合適工具，專注解決真實功課或工作問題。",
-  },
-  {
-    bad: "只做 flashy demo，學員離開課堂就唔知點繼續。",
-    good: "提供可帶走嘅 workflow 同判斷標準，回到學校或公司都用到。",
-  },
-];
 
 const VIBE_CODING_PHILOSOPHY = [
   {
@@ -149,6 +129,8 @@ export default function Courses() {
         return;
       }
       const previousStyle = reference.getAttribute("style");
+      const wasHidden = reference.hidden;
+      reference.hidden = false;
       Object.assign(reference.style, {
         display: "block", position: "absolute", visibility: "hidden",
         width: `${panels.clientWidth}px`, pointerEvents: "none",
@@ -156,6 +138,7 @@ export default function Courses() {
       const height = reference.querySelector(".course-split").getBoundingClientRect().height;
       if (previousStyle === null) reference.removeAttribute("style");
       else reference.setAttribute("style", previousStyle);
+      reference.hidden = wasHidden;
       panels.style.setProperty("--primary-panel-height", `${height}px`);
     };
     syncHeight();
@@ -176,42 +159,30 @@ export default function Courses() {
 
   return (
     <section className="courses" id="courses" aria-labelledby="courses-heading">
-      <img className="courses__world" src={assetUrl("assets/images/dual-world/8.png")} alt="工程師以手勢將後端技術連結到清晰教學流程" loading="lazy" />
       <div className="courses__intro">
+        <p className="label">Practical AI training</p>
         <span className="divider">+</span>
         <h2 id="courses-heading" className="section-title">
-          AI 課程
+          將 AI，帶入你嘅工作同學習。
         </h2>
         <span className="divider">+</span>
         <p className="section-lead">
-          為中學生、小學生、成年人及企業而設，按年齡、程度同需要調整內容與節奏。
+          每次都要重講要求？答案似啱，卻唔知點查？由你手上嘅真實任務出發，練習拆解、協作同覆核。
         </p>
         <a className="btn-outline logistics-entry" href="#corporate-training" onClick={() => setActiveTab("corporate")}>
           企業培訓 · 物流 AI 實戰 · 36 小時 ↓
         </a>
       </div>
 
-      <CourseCompareList
-        heading="我的教學重點：教判斷同方法，唔只教 prompt"
-        items={TEACHING_PHILOSOPHY}
-      />
-
-      <div className="course-formats" id="course-formats">
-        <span className="divider">+</span>
-        <p className="label">課程形式 / 時長</p>
-        <span className="divider">+</span>
-        <p className="section-lead">
-          按對象提供體驗課、系列課、12 小時實用班及全日工作坊；物流企業培訓為 36 小時（實習時間按學員程度計算）。
-        </p>
-        <div className="course-formats__grid">
-          {FORMAT_LADDER.map((format) => (
-            <article className="card" key={format.meta}>
-              <p className="card__meta">{format.meta}</p>
-              <h3 className="card__title">{format.title}</h3>
-              <p className="card__text">{format.text}</p>
-            </article>
-          ))}
-        </div>
+      <div className="teaching-method section-shell">
+        <p className="label">How we learn</p>
+        <h3>三步，建立可以重用嘅方法。</h3>
+        <ol className="method-grid">
+          <li><span>01</span><h4>講清楚問題</h4><p>由一份文件、一個研究題目，或者一個程式需求開始，定義輸入、限制同完成標準。</p></li>
+          <li><span>02</span><h4>分步同 AI 協作</h4><p>拆細任務、補足背景、逐步修改。需要寫程式時，以小幅改動配合 Git、debug 同測試。</p></li>
+          <li><span>03</span><h4>查證，再完成</h4><p>對照來源、檢查內容同程式行為，整理可帶走嘅作品、指令或操作步驟。</p></li>
+        </ol>
+        <p className="teaching-method__tools">實用班：OpenAI Codex · Google Gemini · Microsoft Copilot<br />Vibe Coding：Cursor · Rules · Skills · MCP</p>
       </div>
 
       <div className="course-tabs" role="tablist" aria-label="課程類別">
@@ -221,6 +192,19 @@ export default function Courses() {
             className={`course-tab${activeTab === tab.id ? " is-active" : ""}`}
             role="tab"
             aria-selected={activeTab === tab.id}
+            tabIndex={activeTab === tab.id ? 0 : -1}
+            onKeyDown={(event) => {
+              const current = TABS.findIndex((item) => item.id === tab.id);
+              let next;
+              if (event.key === "ArrowRight") next = (current + 1) % TABS.length;
+              else if (event.key === "ArrowLeft") next = (current - 1 + TABS.length) % TABS.length;
+              else if (event.key === "Home") next = 0;
+              else if (event.key === "End") next = TABS.length - 1;
+              else return;
+              event.preventDefault();
+              setActiveTab(TABS[next].id);
+              document.getElementById(TABS[next].tabId)?.focus();
+            }}
             aria-controls={tab.panelId}
             id={tab.tabId}
             type="button"
@@ -236,6 +220,7 @@ export default function Courses() {
           className={`course-panel${activeTab === "secondary" ? " is-active" : ""}`}
           id="panel-secondary"
           role="tabpanel"
+          tabIndex={0}
           aria-labelledby="tab-secondary"
           hidden={activeTab !== "secondary"}
         >
@@ -273,6 +258,7 @@ export default function Courses() {
           className={`course-panel${activeTab === "primary" ? " is-active" : ""}`}
           id="panel-primary"
           role="tabpanel"
+          tabIndex={0}
           aria-labelledby="tab-primary"
           hidden={activeTab !== "primary"}
         >
@@ -299,6 +285,7 @@ export default function Courses() {
           className={`course-panel${activeTab === "adults" ? " is-active" : ""}`}
           id="panel-adults"
           role="tabpanel"
+          tabIndex={0}
           aria-labelledby="tab-adults"
           hidden={activeTab !== "adults"}
         >
@@ -340,6 +327,7 @@ export default function Courses() {
           className={`course-panel${activeTab === "corporate" ? " is-active" : ""}`}
           id="panel-corporate"
           role="tabpanel"
+          tabIndex={0}
           aria-labelledby="tab-corporate"
           hidden={activeTab !== "corporate"}
         >
@@ -350,6 +338,7 @@ export default function Courses() {
           className={`course-panel${activeTab === "vibe-coding" ? " is-active" : ""}`}
           id="panel-vibe-coding"
           role="tabpanel"
+          tabIndex={0}
           aria-labelledby="tab-vibe-coding"
           hidden={activeTab !== "vibe-coding"}
         >
@@ -399,6 +388,7 @@ export default function Courses() {
           className={`course-panel${activeTab === "digital-human" ? " is-active" : ""}`}
           id="panel-digital-human"
           role="tabpanel"
+          tabIndex={0}
           aria-labelledby="tab-digital-human"
           hidden={activeTab !== "digital-human"}
         >
@@ -438,7 +428,25 @@ export default function Courses() {
         </article>
       </div>
 
-      <CourseContactCta />
+      <details className="course-formats" id="course-formats"><summary>課程形式與時長</summary>
+        <span className="divider">+</span>
+        <p className="label">課程形式 / 時長</p>
+        <span className="divider">+</span>
+        <p className="section-lead">
+          按對象提供體驗課、系列課、12 小時實用班及全日工作坊；物流企業培訓為 36 小時（實習時間按學員程度計算）。
+        </p>
+        <div className="course-formats__grid">
+          {FORMAT_LADDER.map((format) => (
+            <article className="card" key={format.meta}>
+              <p className="card__meta">{format.meta}</p>
+              <h3 className="card__title">{format.title}</h3>
+              <p className="card__text">{format.text}</p>
+            </article>
+          ))}
+        </div>
+      </details>
+
+      <div className="courses__enquiry"><p>唔肯定邊個方向適合？講低你嘅對象、程度同目標。</p><a className="button" href="#course-contact">查詢課程與合作 →</a></div>
 
       {lightbox && (
         <Lightbox
