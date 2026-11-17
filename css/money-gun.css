@@ -1,0 +1,124 @@
+.money-hero {
+  --paper: #fbfbfd;
+  --ink: #171717;
+  --orange: #ff661b;
+  --mono: "IBM Plex Mono", monospace;
+  --sans: "DM Sans", "Noto Sans TC", sans-serif;
+}
+.money-hero * { box-sizing: border-box; }
+.money-hero { margin: 0; width: 100%; min-height: 100%; }
+.money-hero { background: var(--paper); color: var(--ink); font-family: var(--sans); }
+.money-hero button, .money-hero a { -webkit-tap-highlight-color: transparent; }
+.money-hero button { font: inherit; color: inherit; cursor: pointer; }
+.money-hero a { color: inherit; text-decoration: none; }
+.money-hero button:disabled { cursor: wait; }
+.money-hero :focus-visible { outline: 2px solid var(--orange); outline-offset: 5px; }
+.money-hero { position: relative; min-height: 800px; height: 100svh; isolation: isolate; overflow: hidden; }
+.money-hero::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 15; opacity: .045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' filter='url(%23n)' opacity='.6' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+}
+.money-hero .navigation { height: 96px; margin: 0 4.3%; border-bottom: 1px solid #19191922; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 30; }
+.money-hero .logo { font-size: 18px; font-weight: 800; letter-spacing: -.9px; }
+.money-hero .logo-dot { font-family: var(--mono); font-size: 10px; vertical-align: super; margin-left: 3px; }
+.money-hero .navigation nav { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 35px; align-items: center; }
+.money-hero .navigation nav a, .money-hero .navigation nav button { background: none; border: none; padding: 12px 0; font-family: "Noto Sans TC", sans-serif; font-size: 12px; }
+.money-hero .navigation nav a:hover, .money-hero .navigation nav button:hover { color: #b43f0a; }
+.money-hero .talk { display: flex; align-items: center; gap: 24px; border: 1px solid #242424; border-radius: 100px; padding: 11px 19px; font-size: 12px; font-weight: 600; }
+.money-hero .talk:hover { background: var(--ink); color: white; }
+.money-hero .intro { position: relative; width: 55%; padding: clamp(46px,7vh,88px) 0 0 6.5%; z-index: 10; pointer-events: none; }
+.money-hero .intro button, .money-hero .intro a { pointer-events: auto; }
+.money-hero .eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .055em; margin: 0 0 23px; }
+.money-hero .eyebrow > span { font-size: 10px; margin-right: 9px; }
+.money-hero h1 { font-size: clamp(64px,6.5vw,106px); font-weight: 800; letter-spacing: -.075em; line-height: .99; margin: 0; }
+.money-hero h1 em { font-family: "Instrument Serif", serif; font-size: 1.2em; font-weight: 400; letter-spacing: -.055em; padding-right: .06em; }
+.money-hero .roles { display: block; font-size: clamp(22px,2.6vw,40px); font-weight: 600; letter-spacing: -.04em; line-height: 1.25; margin-top: 22px; }
+.money-hero .role-divider { color: #bbb; font-weight: 400; margin-left: .16em; }
+.money-hero .intro-copy { font-family: "Noto Sans TC", sans-serif; font-size: 12px; color: #646464; line-height: 1.9; margin: 25px 0 24px; letter-spacing: .01em; }
+.money-hero .mobile-break { display: none; }
+.money-hero .actions { display: flex; align-items: center; gap: 10px; position: relative; z-index: 12; }
+.money-hero .actions button { display: inline-flex; gap: 23px; align-items: center; justify-content: center; min-height: 47px; border: 1px solid #222; border-radius: 100px; font-size: 12px; font-weight: 500; padding: 0 20px; touch-action: none; transition: transform 100ms, background 160ms; }
+.money-hero .actions button:active { transform: scale(.96); }
+.money-hero .primary { background: var(--ink); color: white; }
+.money-hero .primary:hover { background: #3b3b3b; }
+.money-hero .clear { background: var(--paper); }
+.money-hero .clear:hover { background: #eeeef1; }
+.money-hero .counter { font-family: var(--mono); font-size: 10px; color: #777; margin-left: 8px; white-space: nowrap; }
+.money-hero .counter span { color: var(--ink); font-weight: 500; font-size: 12px; font-variant-numeric: tabular-nums; }
+.money-hero .status { font-size: 11px; color: #777; max-width: 370px; line-height: 1.6; min-height: 18px; margin-top: 12px; }
+.money-hero .status:empty { visibility: hidden; }
+.money-hero .gun-stage { position: absolute; width: 58%; height: calc(100% - 185px); top: 125px; right: -1%; z-index: 3; }
+.money-hero #gun-canvas { display: block; width: 100%; height: 100%; }
+.money-hero .gun-hit { position: absolute; width: 77%; height: 63%; left: 11%; top: 16%; border: 0; border-radius: 38%; background: transparent; cursor: pointer; touch-action: none; }
+.money-hero .gun-hit:active { cursor: grabbing; }
+.money-hero .playground { position: absolute; inset: 0; z-index: 8; pointer-events: none; }
+.money-hero .skill-card {
+  position: absolute; top: 0; left: 0; width: max-content; height: auto; border-radius: 11px;
+  background: var(--card-color); color: var(--card-ink); border: 1px solid #00000020; box-shadow: 0 3px 1px #00000008, 0 9px 17px -9px #0000002e;
+  padding: 13px 17px; display: flex; flex-direction: column; justify-content: center; user-select: none; touch-action: none;
+  pointer-events: auto; cursor: grab; will-change: transform;
+}
+.money-hero .skill-card:active, .money-hero .skill-card.is-dragging { cursor: grabbing; z-index: 10; }
+.money-hero .skill-card strong { display: block; font-size: 26px; font-weight: 800; letter-spacing: -.055em; line-height: 1.1; white-space: nowrap; }
+.money-hero .skill-card small { font-family: var(--mono); font-size: 8px; letter-spacing: .08em; margin-top: 9px; display: flex; justify-content: space-between; gap: 16px; white-space: nowrap; }
+.money-hero .skill-card small span:last-child { font-size: 10px; }
+.money-hero .hero-footer { position: absolute; bottom: 0; left: 4.3%; right: 4.3%; height: 65px; display: flex; justify-content: flex-end; align-items: center; z-index: 25; pointer-events: none; }
+.money-hero .hero-footer p { display: flex; align-items: center; gap: 10px; color: #737373; font-size: 10px; }
+.money-hero .hint-dot { width: 5px; height: 5px; background: var(--orange); border-radius: 50%; }
+.money-hero .keycap { border: 1px solid #bbb; border-bottom-width: 2px; border-radius: 4px; font-family: var(--mono); font-size: 8px; padding: 4px 6px; margin-left: 4px; }
+.money-hero dialog { border: 1px solid #ddd; border-radius: 20px; padding: 48px; max-width: min(520px,calc(100vw - 32px)); color: var(--ink); background: var(--paper); }
+.money-hero dialog::backdrop { background: #1118; backdrop-filter: blur(7px); }
+.money-hero .dialog-close { position: absolute; right: 12px; top: 10px; background: transparent; border: 0; width: 44px; height: 44px; font-size: 27px; }
+.money-hero dialog h2 { font-size: 42px; letter-spacing: -.05em; line-height: 1.1; margin: 25px 0; }
+.money-hero dialog p, .money-hero dialog li { font-size: 14px; line-height: 1.9; color: #555; }
+.money-hero dialog ol { padding-left: 20px; }
+.money-hero dialog li { padding-left: 8px; margin-top: 16px; }
+.money-hero dialog li strong { display: block; color: #222; }
+.money-hero .dialog-link { display: inline-block; margin-top: 16px; text-decoration: underline; text-underline-offset: 4px; }
+@media (min-width: 1600px) { .money-hero .intro { padding-top: 8vh; } .money-hero .gun-stage { right: 0; } }
+@media (max-height: 820px) and (min-width: 901px) {
+  .money-hero { min-height: 720px; }
+  .money-hero .navigation { height: 78px; }
+  .money-hero .intro { padding-top: 32px; }
+  .money-hero h1 { font-size: clamp(64px,6.2vw,90px); }
+  .money-hero .roles { font-size: clamp(23px,2.3vw,34px); margin-top: 16px; }
+  .money-hero .intro-copy { margin-block: 18px; }
+  .money-hero .gun-stage { top: 90px; height: calc(100% - 160px); }
+}
+@media (max-width: 900px) {
+  .money-hero { min-height: 800px; height: 100svh; }
+  .money-hero .navigation { height: 76px; margin-inline: 6%; }
+  .money-hero .navigation nav { position: static; transform: none; gap: 22px; }
+  .money-hero .intro { width: 90%; padding: 42px 0 0 7%; }
+  .money-hero h1 { font-size: clamp(64px,9vw,86px); }
+  .money-hero .roles { font-size: 27px; margin-top: 16px; }
+  .money-hero .roles br { display: none; }
+  .money-hero .roles { max-width: 600px; }
+  .money-hero .role-divider { margin-inline: 2px; }
+  .money-hero .intro-copy { margin-block: 20px; }
+  .money-hero .gun-stage { top: 400px; width: 85%; height: calc(100% - 440px); right: -8%; }
+  .money-hero .hero-footer { justify-content: flex-end; height: 55px; }
+}
+@media (max-width: 520px) {
+  .money-hero { min-height: 780px; height: 100svh; }
+  .money-hero .navigation { margin-inline: 6%; height: 100px; display: grid; grid-template-columns: 1fr auto; align-content: center; gap: 2px 12px; }
+  .money-hero .navigation .talk { display: flex; grid-column: 2; grid-row: 1; font-size: 10px; padding: 7px 11px; gap: 10px; }
+  .money-hero .navigation nav { grid-column: 1 / -1; grid-row: 2; justify-content: center; }
+  .money-hero .logo { font-size: 15px; }
+  .money-hero .navigation nav { gap: 16px; }
+  .money-hero .navigation nav a, .money-hero .navigation nav button { font-size: 10px; min-height: 44px; }
+  .money-hero .intro { width: 100%; padding: 22px 6% 0; }
+  .money-hero .eyebrow { font-size: 9px; margin-bottom: 20px; }
+  .money-hero h1 { font-size: clamp(51px,16.9vw,66px); }
+  .money-hero .roles { font-size: 22px; line-height: 1.35; max-width: 340px; }
+  .money-hero .intro-copy { font-size: 11px; margin-block: 19px; }
+  .money-hero .mobile-break { display: block; }
+  .money-hero .actions { flex-wrap: wrap; gap: 9px; }
+  .money-hero .actions button { font-size: 11px; min-height: 44px; padding-inline: 17px; gap: 20px; }
+  .money-hero .counter { font-size: 9px; margin-left: 1px; }
+  .money-hero .gun-stage { top: 420px; width: 115%; right: -15%; height: calc(100% - 455px); }
+  .money-hero .hero-footer p { font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .money-hero *, .money-hero *::before, .money-hero *::after { scroll-behavior: auto !important; transition: none !important; }
+}

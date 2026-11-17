@@ -1,36 +1,70 @@
+import { useEffect, useRef } from "react";
 import { assetUrl } from "../utils/assetUrl";
+import "../../css/money-gun.css";
 
 export default function Hero() {
+  const root = useRef(null);
+
+  useEffect(() => {
+    let disposed = false;
+    let cleanup;
+    import(/* @vite-ignore */ assetUrl("assets/money-gun/hero.js"))
+      .then(({ mountHero }) => {
+        if (!disposed) cleanup = mountHero(root.current);
+      })
+      .catch(() => {
+        if (!disposed) {
+          root.current.querySelector("#status").textContent =
+            "作品槍未能載入，請檢查網絡後重新整理。";
+        }
+      });
+    return () => {
+      disposed = true;
+      cleanup?.();
+    };
+  }, []);
+
   return (
-    <header className="hero" id="top">
-      <nav className="site-nav" aria-label="主要導覽">
-        <div className="site-nav__inner">
-          <div className="site-nav__links" style={{ flex: 1 }}>
-            <a style={{ marginRight: "auto" }}></a>
-            <a href="#projects">作品</a><a href="#courses">教學</a><a href="#experience">經驗</a>
-            <a className="nav-contact" href="#course-contact">聯絡我</a>
-          </div>
-        </div>
+    <header className="money-hero" id="top" ref={root}>
+
+    <div className="navigation">
+      <a className="logo" href="#top" aria-label="This is Oscar 首頁">This is Oscar<span className="logo-dot">®</span></a>
+      <nav aria-label="主要導覽">
+        <a id="work-link" href="#projects">作品</a>
+        <a href="#about">關於</a>
+        <button type="button" data-dialog="process-dialog">流程</button>
+        <a href="https://www.instagram.com/innotrendedu/" target="_blank" rel="noopener noreferrer">聯絡</a>
       </nav>
-      <div className="hero__layout section-shell">
-        <div className="hero__content">
-          <p className="label">Backend Engineer · Analyst Programmer · AI Course Instructor</p>
-          <h1>寫好系統。<br /><span>教懂 AI。</span></h1>
-          <p className="hero__lead">幫團隊將重複工作變成清晰流程，<br className="desktop-break" />帶學員由試用 AI，到有方法地完成作品。</p>
-          <p className="hero__detail">This is Oscar。以 SpringBoot、Django 做後端開發，ReactJS做前端開發，亦為企業、學校同成人設計實用 AI 課程。</p>
-          <div className="hero__actions">
-            <a className="button" href="#projects">睇精選作品 <span aria-hidden="true">↓</span></a>
-            <a className="text-link" href="#courses">了解 AI 培訓 <span aria-hidden="true">→</span></a>
-          </div>
-        </div>
-        <figure className="hero__visual">
-          <img src={assetUrl("assets/images/dual-world/2.png")} alt="藍圖與紙張兩個世界交匯，象徵工程實作與教學" width="1672" height="941" fetchPriority="high" />
-          <figcaption><span>Engineering meets education.</span><span>Hong Kong · 廣東話教學</span></figcaption>
-        </figure>
+      <a className="talk" href="https://www.instagram.com/innotrendedu/" target="_blank" rel="noopener noreferrer">Want To Talk? <span aria-hidden="true">↗</span></a>
+    </div>
+
+    <section className="intro" aria-labelledby="hero-heading">
+      <p className="eyebrow"><span aria-hidden="true">●</span> PORTFOLIO @2026</p>
+      <h1 id="hero-heading">Hello,<br />This is <em>Oscar,</em><span className="roles">A Backend Engineer <span className="role-divider">/</span><br />Analyst Programmer <span className="role-divider">/</span><br />AI Course Instructor.</span></h1>
+      <p className="intro-copy">我識嘅嘢都會係呢把槍射出嚟。<br className="mobile-break" />Click 一下，出一張。</p>
+      <div className="actions">
+        <button className="shoot primary" id="shoot" type="button" disabled><span>噴出作品</span><span aria-hidden="true">↖</span></button>
+        <button className="clear" id="clear" type="button">收拾乾淨 <span aria-hidden="true">↺</span></button>
+        <p className="counter">已噴出 <span id="count">0</span> 張</p>
       </div>
-      <div className="hero__credentials section-shell" aria-label="工作背景">
-        <span>企業後端 <strong>IBM</strong></span><span>開發與自動化 <strong>Venturenix Lab</strong></span><span>AI 教學 <strong>InnoTrend Education</strong></span>
-      </div>
+      <p className="status" id="status" role="status">正在準備作品槍…</p>
+    </section>
+
+    <div className="gun-stage" id="gun-stage">
+      <canvas id="gun-canvas" aria-hidden="true"></canvas>
+      <button className="gun-hit" id="gun-hit" type="button" aria-label="按一下噴出技能卡，按住連發" disabled></button>
+    </div>
+
+    <div className="playground" id="playground" aria-label="可以抓起來甩動嘅技能卡"></div>
+    <div className="hero-footer">
+      <p><span className="hint-dot" aria-hidden="true"></span>按住槍或空白鍵，連續噴發<span className="keycap" aria-hidden="true">SPACE</span></p>
+    </div>
+
+  <dialog id="process-dialog" aria-labelledby="process-heading">
+    <button className="dialog-close" aria-label="關閉" type="button">×</button>
+    <p className="eyebrow">HOW I WORK</p><h2 id="process-heading">拆解。實作。<br />覆核。</h2>
+    <ol><li><strong>理解任務</strong>先釐清背景、限制同完成標準。</li><li><strong>逐步實作</strong>配合程式、AI 同合適工具完成小幅改動。</li><li><strong>檢查成果</strong>查證來源、測試行為，再交付。</li></ol>
+  </dialog>
     </header>
   );
 }
