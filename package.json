@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "test": "node --test",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "gsap": "^3.15.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

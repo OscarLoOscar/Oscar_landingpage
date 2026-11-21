@@ -1,37 +1,39 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { assetUrl } from "../utils/assetUrl";
 
 export default function Lightbox({ images, index, onClose, onChange }) {
   const current = images[index];
+  const dialogRef = useRef(null);
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-      if (event.key === "ArrowLeft") {
-        onChange((index - 1 + images.length) % images.length);
-      }
-      if (event.key === "ArrowRight") {
-        onChange((index + 1) % images.length);
-      }
-    };
-
+    const dialog = dialogRef.current;
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    dialog.showModal();
     document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
-
     return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKeyDown);
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+      previousFocus?.focus({ preventScroll: true });
     };
-  }, [images.length, index, onChange, onClose]);
+  }, []);
 
   if (!current) {
     return null;
   }
 
   return (
-    <div className="lightbox" role="dialog" aria-modal="true" aria-label={current.alt}>
+    <dialog
+      ref={dialogRef}
+      className="lightbox"
+      aria-label={current.alt}
+      onCancel={(event) => { event.preventDefault(); onClose(); }}
+      onKeyDown={(event) => {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        onChange((index + (event.key === "ArrowRight" ? 1 : -1) + images.length) % images.length);
+      }}
+    >
       <button type="button" className="lightbox__backdrop" onClick={onClose} aria-label="關閉" />
       <div className="lightbox__content">
         <button type="button" className="lightbox__close" onClick={onClose} aria-label="關閉">
@@ -68,6 +70,6 @@ export default function Lightbox({ images, index, onClose, onChange }) {
           )}
         </p>
       </div>
-    </div>
+    </dialog>
   );
 }

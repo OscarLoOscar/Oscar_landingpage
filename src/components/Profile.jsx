@@ -1,61 +1,16 @@
 export default function Profile() {
   return (
-    <section className="profile" id="profile" aria-labelledby="profile-heading">
+    <section className="profile section-pad" id="profile" aria-labelledby="profile-heading">
       <div className="section-shell">
         <div className="section-intro">
-          <span className="divider">+</span>
-          <p className="label">Professional Summary</p>
-          <span className="divider">+</span>
-          <h2 id="profile-heading" className="section-title">
-            Practical backend engineering with an educator&apos;s mindset.
-          </h2>
-          <span className="divider">+</span>
-          <p className="section-lead">
-            Java and Python focused engineer with startup execution, enterprise delivery experience,
-            and a strong track record of building tools that make teams faster and systems more
-            reliable.
-          </p>
+          <p className="label">Practical outcomes</p>
+          <h2 id="profile-heading" className="section-title">由實際問題，<br />做到有依據嘅成果。</h2>
+          <p className="section-lead">企業開發同個人實作，分開交代。每個數字，都有自己嘅範圍。</p>
         </div>
-
-        <div className="profile__grid">
-          <article className="card">
-            <p className="card__meta">Summary</p>
-            <h3 className="card__title">Enterprise delivery, automation, and product-minded execution.</h3>
-            <p className="card__text">
-              Analyst Programmer with hands-on experience delivering enterprise-grade backend systems
-              at IBM and driving operational efficiency in startup environments. Specialized in Java
-              with Spring Boot and Python with Django, with practical experience in microservices,
-              AWS cloud operations, and high-performance API design.
-            </p>
-            <p className="card__text">
-              I enjoy turning messy operational pain points into maintainable software, from backend
-              services to internal automation, always with a bias toward measurable business value.
-            </p>
-          </article>
-
-          <article className="card">
-            <p className="card__meta">Core Strengths</p>
-            <h3 className="card__title">Technical depth with clear communication.</h3>
-            <ul className="card__list">
-              <li>Java, Spring Boot, Python, Django, PostgreSQL, MySQL, Redis, and REST API design</li>
-              <li>AWS operations, SonarQube remediation, K6 testing, and production reliability work</li>
-              <li>Automation thinking that reduces repetitive work and improves team throughput</li>
-              <li>Teaching, mentoring, and translating technical ideas for students and junior developers</li>
-            </ul>
-          </article>
-
-          <article className="card">
-            <p className="card__meta">Career Transition</p>
-            <h3 className="card__title">A successful move from frontline operations into software engineering.</h3>
-            <p className="card__text">
-              Before entering tech, I spent a decade in service and team management roles. That path
-              built strong ownership, client communication, and execution under pressure.
-            </p>
-            <p className="card__text">
-              Today, that transition shows up in how I build software: practical, user-aware, and
-              focused on solutions that teams can actually adopt and sustain.
-            </p>
-          </article>
+        <div className="results-grid">
+          <article className="result"><p className="result__value">60<span> → </span>85%+</p><h3>關鍵模組單元測試覆蓋率</h3><p>於 IBM 參與 HKTDC 平台開發，將相關模組由約 60% 提升至 85%+。</p><p className="evidence-note">IBM · 2025 年 4–8 月 · 個人工作成果陳述</p></article>
+          <article className="result"><p className="result__value">10+<span> 小時／週</span></p><h3>減少重複招聘工作</h3><p>透過 WhatsApp Chrome extension 同 Python JobsDB 系統，處理重複操作。</p><p className="evidence-note">Venturenix Lab · 2023 年 6 月–2025 年 3 月 · 個人工作成果陳述</p></article>
+          <article className="result"><p className="result__value">40<span>%</span></p><h3>行政處理時間減幅</h3><p>以 Spring Boot＋React 建立 Job Opening System，加入自動合約生成功能。</p><p className="evidence-note">Venturenix Lab · 2023 年 6 月–2025 年 3 月 · 個人工作成果陳述</p></article>
         </div>
       </div>
     </section>
