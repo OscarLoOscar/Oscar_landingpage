@@ -48,15 +48,15 @@ const FORMAT_LADDER = [
 ];
 
 const TABS = [
-  { id: "secondary", label: "中學生", panelId: "panel-secondary", tabId: "tab-secondary" },
-  { id: "primary", label: "小學生", panelId: "panel-primary", tabId: "tab-primary" },
-  { id: "adults", label: "大人", panelId: "panel-adults", tabId: "tab-adults" },
   {
     id: "corporate",
     label: "企業AI培訓",
     panelId: "panel-corporate",
     tabId: "tab-corporate",
   },
+  { id: "secondary", label: "中學生", panelId: "panel-secondary", tabId: "tab-secondary" },
+  { id: "primary", label: "小學生", panelId: "panel-primary", tabId: "tab-primary" },
+  { id: "adults", label: "大人", panelId: "panel-adults", tabId: "tab-adults" },
   { id: "vibe-coding", label: "Vibe Coding", panelId: "panel-vibe-coding", tabId: "tab-vibe-coding" },
   { id: "digital-human", label: "數字人廣告", panelId: "panel-digital-human", tabId: "tab-digital-human" },
 ];
