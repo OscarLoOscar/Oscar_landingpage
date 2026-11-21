@@ -14,9 +14,9 @@ test("the portfolio provides clear routes, accurate evidence boundaries and work
     const { default: App } = await vite.ssrLoadModule("/src/App.jsx");
     const markup = renderToStaticMarkup(createElement(App));
     assert.equal((markup.match(/<h1[ >]/g) || []).length, 1);
-    assert.match(markup, /class="money-hero"/);
-    assert.doesNotMatch(markup, /site-nav__inner/);
-    assert.ok(existsSync("assets/money-gun/hero.js"));
+    assert.match(markup, /class="furrow-map"/);
+    assert.equal((markup.match(/class="furrow-map__pin"/g) || []).length, 15);
+    assert.match(markup, /Ship &amp; Present/);
     const ids = [...markup.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
     assert.equal(new Set(ids).size, ids.length, "IDs must be unique");
     for (const [, id] of markup.matchAll(/href="#([^"]+)"/g)) {
