@@ -48,16 +48,11 @@ const FORMAT_LADDER = [
 ];
 
 const TABS = [
-  {
-    id: "corporate",
-    label: "企業AI培訓",
-    panelId: "panel-corporate",
-    tabId: "tab-corporate",
-  },
-  { id: "secondary", label: "中學生", panelId: "panel-secondary", tabId: "tab-secondary" },
-  { id: "primary", label: "小學生", panelId: "panel-primary", tabId: "tab-primary" },
-  { id: "adults", label: "大人", panelId: "panel-adults", tabId: "tab-adults" },
+  { id: "corporate", label: "企業AI培訓", panelId: "panel-corporate", tabId: "tab-corporate" },
   { id: "vibe-coding", label: "Vibe Coding", panelId: "panel-vibe-coding", tabId: "tab-vibe-coding" },
+  { id: "primary", label: "小學生", panelId: "panel-primary", tabId: "tab-primary" },
+  { id: "secondary", label: "中學生", panelId: "panel-secondary", tabId: "tab-secondary" },
+  { id: "adults", label: "大人", panelId: "panel-adults", tabId: "tab-adults" },
   { id: "digital-human", label: "數字人廣告", panelId: "panel-digital-human", tabId: "tab-digital-human" },
 ];
 
@@ -100,9 +95,25 @@ const VIBE_IMAGES = [
 ];
 
 export default function Courses() {
-  const [activeTab, setActiveTab] = useState("secondary");
+  const [activeTab, setActiveTab] = useState("corporate");
   const [lightbox, setLightbox] = useState(null);
   const panelsRef = useRef(null);
+  const navigatePanel = useRef(false);
+
+  useLayoutEffect(() => {
+    if (!navigatePanel.current) return;
+    navigatePanel.current = false;
+    document.getElementById(TABS.find(tab => tab.id === activeTab).panelId)?.scrollIntoView({ block: "start", behavior: "instant" });
+  });
+
+  const activateTab = (id) => {
+    navigatePanel.current = true;
+    setActiveTab(id);
+    if (id === activeTab) {
+      navigatePanel.current = false;
+      document.getElementById(TABS.find(tab => tab.id === id).panelId)?.scrollIntoView({ block: "start", behavior: "instant" });
+    }
+  };
 
   useEffect(() => {
     const openCorporate = () => {
@@ -208,7 +219,7 @@ export default function Courses() {
             aria-controls={tab.panelId}
             id={tab.tabId}
             type="button"
-            onClick={() => setActiveTab(tab.id)}
+            onClick={() => activateTab(tab.id)}
           >
             {tab.label}
           </button>
